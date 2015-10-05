@@ -11,6 +11,15 @@ gulp.task('compileTS', function() {
 	return stream;
 });
 
-gulp.task('default',['compileTS'], function() {
+gulp.task('compileTestTS', function() {
+	var stream = gulp.src('../test.ts')
+			.pipe(gulpTypescript({
+				out: "test.js"
+			}))
+			.pipe(gulp.dest("../../"));
+	return stream;
+});
+
+gulp.task('default',['compileTS','compileTestTS'], function() {
 	console.log('Typescript compiled');
 });
