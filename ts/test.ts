@@ -9,7 +9,7 @@ var getAnswerTest = function() {
 };
 
 var getChoiceTest = function() {
-    smartcli.getChoice('What to you like best?',['Cars','Planes','Boats'],function(answer){
+    smartcli.getChoice('What music do you like to hear?',['Jazz','Blues','Classical'],function(answer){
         console.log('The answer is: ' + answer);
         getCwdTest();
     });
