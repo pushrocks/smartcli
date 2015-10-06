@@ -39,7 +39,14 @@ smartcli.checkOption = function(optionParam:string):boolean {
         return true;
     }
     return false
-}
+};
+
+smartcli.getOptionValue = function(optionParam:string):any {
+    if (smartcli.checkOption(optionParam)) {
+        return argv[optionParam]
+    }
+    return false;
+};
 
 smartcli.getOptions = function() {
     var options = {};
