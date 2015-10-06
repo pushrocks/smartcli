@@ -14,6 +14,43 @@ smartcli.inquirer = inquirer;
 smartcli.cliff = cliff;
 smartcli.argv = argv;
 
+/* ------------------------------------------------------------------------------
+ *----------------------- initial call CLI args -----------------------------
+ *----------------------------------------------------------------------------- */
+
+// commands
+
+
+smartcli.checkCommand = function(commandString:string):boolean {
+    if (argv._.indexOf(commandString) != -1) {
+        return true
+    }
+    return false;
+};
+
+smartcli.getCommands = function ():string[] {
+    return argv._;
+};
+
+
+// options
+smartcli.checkOption = function(optionParam:string):boolean {
+    if (argv.hasOwnProperty(optionParam)) {
+        return true;
+    }
+    return false
+}
+
+smartcli.getOptions = function() {
+    var options = {};
+    for (var key in argv) {
+        if (key != "_") {
+            options['key'] = argv['key'];
+        }
+    }
+    return options;
+};
+
 /**
  * returns the current working directory
  * @returns {string}
@@ -21,6 +58,14 @@ smartcli.argv = argv;
 smartcli.getCwd = function () {
     return process.cwd();
 };
+
+
+
+/* ------------------------------------------------------------------------------
+*----------------------- in program CLI interaction -----------------------------
+*----------------------------------------------------------------------------- */
+
+
 
 /**
  * executes callback with answer to question as argument
