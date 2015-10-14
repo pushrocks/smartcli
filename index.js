@@ -1,4 +1,6 @@
+/// <reference path="index.ts" />
 /// <reference path="typings/tsd.d.ts" />
+/// <reference path="./interfaces.ts" />
 var path = require("path");
 var beautylog = require("beautylog");
 var cliff = require("cliff");
@@ -24,11 +26,19 @@ smartcli.getCommands = function () {
     return argv._;
 };
 // options
-smartcli.checkOption = function (optionParam) {
-    if (argv.hasOwnProperty(optionParam)) {
-        return true;
+smartcli.getOption = function (optionName) {
+    if (argv.hasOwnProperty(optionName)) {
+        return {
+            name: optionName,
+            specified: true,
+            value: argv[optionName] //we already know from the "if" above that the value is available.
+        };
     }
-    return false;
+    return {
+        name: optionName,
+        specified: false,
+        value: false
+    };
 };
 smartcli.getOptions = function () {
     var options = {};
@@ -40,11 +50,13 @@ smartcli.getOptions = function () {
     return options;
 };
 /**
- * returns the current working directory
- * @returns {string}
+ * returns Directory of cwd
+ * @returns {{path: string}}
  */
 smartcli.getCwd = function () {
-    return process.cwd();
+    return {
+        path: process.cwd()
+    };
 };
 /* ------------------------------------------------------------------------------
 *----------------------- in program CLI interaction -----------------------------

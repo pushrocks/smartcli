@@ -1,4 +1,5 @@
 /// <reference path="typings/tsd.d.ts" />
+/// <reference path="./interfaces.ts" />
 
 var path = require("path");
 var beautylog = require("beautylog");
@@ -34,19 +35,22 @@ smartcli.getCommands = function ():string[] {
 
 
 // options
-smartcli.checkOption = function(optionParam:string):boolean {
-    if (argv.hasOwnProperty(optionParam)) {
-        return true;
+smartcli.getOption = function(optionName:string):CliOption {
+    if (argv.hasOwnProperty(optionName)) {
+        return {
+            name:optionName,
+            specified: true,
+            value: argv[optionName] //we already know from the "if" above that the value is available.
+        };
+
     }
-    return false
+    return {
+        name:optionName,
+        specified: false,
+        value: false
+    }
 };
 
-smartcli.getOptionValue = function(optionParam:string):any {
-    if (smartcli.checkOption(optionParam)) {
-        return argv[optionParam]
-    }
-    return false;
-};
 
 smartcli.getOptions = function() {
     var options = {};
@@ -59,11 +63,13 @@ smartcli.getOptions = function() {
 };
 
 /**
- * returns the current working directory
- * @returns {string}
+ * returns Directory of cwd
+ * @returns {{path: string}}
  */
-smartcli.getCwd = function () {
-    return process.cwd();
+smartcli.getCwd = function():Directory {
+    return {
+        path: process.cwd()
+    }
 };
 
 
