@@ -7,11 +7,13 @@ nodejs wrapper for CLI related tasks
 [![devDependency Status](https://david-dm.org/pushrocks/smartcli/dev-status.svg)](https://david-dm.org/pushrocks/smartcli#info=devDependencies)
 
 ### Usage
-This npm package comes with everything you need to start your own gulp plugin.
+```js
 
-We recommend modifying the ts/index.ts file, 
-then run `npm install` to install the dev dependencies
-and use `npm test` to compile the TypeScript file.
- 
-Cheers  
+//returns true for terminal command "node yourjs.js jazz"
+smartcli.checkCommand('jazz'); 
+
+smartcli.getOption('myoption');
+``
+
+Cheers
 Phil from Lossless Digital
