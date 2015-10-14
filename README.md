@@ -25,7 +25,7 @@ smartcli.checkCommand('jazz');
 * }
 */
 smartcli.getOption('myoption');
-``
+```
 
 Cheers
 Phil from Lossless Digital
