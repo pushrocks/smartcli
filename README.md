@@ -17,7 +17,7 @@ var smartcli = require("smartcli");
 smartcli.checkCommand('jazz'); 
 
 /**
-* returns an object for terminal command "node myjs.js --myoption something like so
+* returns an object for terminal command "node myjs.js --myoption something" like so
 * {
 *   name: 'myoption',
 *   specified: true,
