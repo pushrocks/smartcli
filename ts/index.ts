@@ -1,76 +1,29 @@
 /// <reference path="typings/tsd.d.ts" />
-/// <reference path="./interfaces.ts" />
+/// <reference path="./smartcli.plugins.ts" />
+/// <reference path="./smartcli.interfaces.ts" />
+/// <reference path="./smartcli.checks.ts" />
+/// <reference path="./smartcli.getters.ts" />
 
-var path = require("path");
-var beautylog = require("beautylog");
-var cliff = require("cliff");
-var inquirer = require("inquirer");
-var argv = require('yargs').argv;
+var plugins = smartcliPlugins.init(); //get all the required npm modules under plugins
 
 //define the smartcli object
 var smartcli:any = {};
 
 //add plugins from above for direct use
-smartcli.inquirer = inquirer;
-smartcli.cliff = cliff;
-smartcli.argv = argv;
+smartcli.inquirer = plugins.inquirer; //inquirer is for asking questions
+smartcli.cliff = plugins.cliff; // formats cli output
+smartcli.argv = plugins.argv; //argv gets initial cli commands and options.
 
-/* ------------------------------------------------------------------------------
- *----------------------- initial call CLI args -----------------------------
- *----------------------------------------------------------------------------- */
+//init checks. Checks return boolean. That means they can be used as question with an answer of yes or no.
 
-// commands
+smartcliChecks.init(); // is defined in smartcli.checks.ts
 
 
-smartcli.checkCommand = function(commandString:string):boolean {
-    if (argv._.indexOf(commandString) != -1) {
-        return true
-    }
-    return false;
-};
-
-smartcli.getCommands = function ():string[] {
-    return argv._;
-};
 
 
-// options
-smartcli.getOption = function(optionName:string):CliOption {
-    if (argv.hasOwnProperty(optionName)) {
-        return {
-            name:optionName,
-            specified: true,
-            value: argv[optionName] //we already know from the "if" above that the value is available.
-        };
-
-    }
-    return {
-        name:optionName,
-        specified: false,
-        value: false
-    }
-};
 
 
-smartcli.getOptions = function() {
-    var options = {};
-    for (var key in argv) {
-        if (key != "_") {
-            options['key'] = argv['key'];
-        }
-    }
-    return options;
-};
 
-/**
- * returns Directory of cwd
- * @returns {{path: string}}
- */
-smartcli.getCwd = function():Directory {
-    return {
-        path: process.cwd()
-    }
-};
 
 
 
@@ -88,7 +41,7 @@ smartcli.getCwd = function():Directory {
  */
 smartcli.getAnswer = function(questionString:string, cb) {
     if (typeof questionString != 'string') {
-        beautylog.error('no question specified');
+        plugins.beautylog.error('no question specified');
         return null;
     }
     //make inquirer compatible question object
@@ -101,7 +54,7 @@ smartcli.getAnswer = function(questionString:string, cb) {
         }
     };
 
-    inquirer.prompt([question],function(answers){
+    plugins.inquirer.prompt([question],function(answers){
         var answer = answers.userFeedback;
         cb(answer);
     });
@@ -128,7 +81,7 @@ smartcli.getChoice = function(questionString:string, choiceOptions:string[], cb)
         filter: function( val ) { return val.toLowerCase(); }
     };
 
-    inquirer.prompt(question,function(answers){
+    plugins.inquirer.prompt(question,function(answers){
         var answer = answers.userFeedback;
         cb(answer);
     });

@@ -10,6 +10,20 @@ nodejs wrapper for CLI related tasks
     npm install smartcli
 
 ### Usage
+
+this plugin tries to establish some logic in which CLI tools work.
+
+take the following commandline input:
+
+```
+mytool function argument1 argument2 --option1 option1Value --option2 option2Value
+```
+
+* 'mytool' obviously is the tool (like git)
+* function is the main thing the tool shall do (like commit)
+* option is an option you can add (like -m for message)
+* optionValue is the referenced option value (like a commit message)
+
 ```js
 var smartcli = require("smartcli");
 
