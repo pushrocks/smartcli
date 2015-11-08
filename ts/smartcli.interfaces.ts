@@ -12,13 +12,12 @@ interface Directory {
 interface CliCommand {
     specified: boolean;
     name: string;
-    second: string;
-    third: string;
-    fourth: string;
+    arguments:string[];
 }
 
 interface CliCommandArgument {
     specified:boolean;
     name:string;
+    level:number;
 }
 
