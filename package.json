@@ -1,6 +1,6 @@
 {
   "name": "smartcli",
-  "version": "0.0.10",
+  "version": "0.0.11",
   "description": "nodejs wrapper for CLI related tasks",
   "main": "index.js",
   "scripts": {
