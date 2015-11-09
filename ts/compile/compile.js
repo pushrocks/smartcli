@@ -23,3 +23,4 @@ gulp.task('compileTestTS', function() {
 gulp.task('default',['compileTS','compileTestTS'], function() {
 	console.log('Typescript compiled');
 });
+gulp.start.apply(gulp, ['default']);
