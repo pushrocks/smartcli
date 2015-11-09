@@ -12,7 +12,7 @@ interface Directory {
 interface CliCommand {
     specified: boolean;
     name: string;
-    arguments:string[];
+    arguments:CliCommandArgument[];
 }
 
 interface CliCommandArgument {
