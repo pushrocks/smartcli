@@ -84,6 +84,67 @@ checkCommandArgumentPresenceTest();
 /* ------------------------------------------------------------------ *
  * ------------------- GETTERS TESTS -------------------------------- *
  * ------------------------------------------------------------------ */
+var getCommandTest = function(){
+    var cliCommand = smartcli.get.command();
+    if(cliCommand.name == "jazz") {
+        bl.success('The specified command name is "jazz". Perfect!');
+    } else {
+        bl.error('The specified command name is not "jazz". Something is wrong!');
+        process.exit(1);
+    }
+
+};
+getCommandTest();
+
+var getCommandArgumentTest = function() {
+    var cliArgument = smartcli.get.commandArgument(1);
+    var cliArgument2 = smartcli.get.commandArgument(2);
+    if(cliArgument.name == "jam") {
+        bl.success('The first specified command argument name is "jam". Perfect!');
+    } else {
+        bl.error('The first specified command argument name is not "jam". Something is wrong!');
+        process.exit(1);
+    }
+
+    if(cliArgument2.name == "undefined") {
+        bl.success('The second specified command argument name is "undefined". Perfect!');
+    } else {
+        bl.error('The second specified command argument name is not "undefined". Something is wrong!');
+        process.exit(1);
+    }
+};
+getCommandArgumentTest();
+
+var getCommandArgsTest = function() {
+    var commandArgs = smartcli.get.commandArgs();
+    if(commandArgs[0].name == "jam") {
+        bl.success("first command argument is 'jam'. Perfect!");
+    } else {
+        bl.error("first command argument is not 'jam'. Something is wromg!");
+        console.log(commandArgs[0].name);
+        process.exit(1);
+    }
+};
+getCommandArgsTest();
+
+var getOptionTest = function() {
+    var cliOption = smartcli.get.option("awesome");
+    var cliOption2 = smartcli.get.option("terrific");
+    if(cliOption.specified){
+        bl.success("awesome is specified. Perfect!")
+    } else {
+        bl.error("awesome is not specified. Somehthing is wrong");
+        process.exit(1);
+    }
+    if(!cliOption2.specified){
+        bl.success("terrific is not specified. Perfect!")
+    } else {
+        bl.error("terrific is specified. Somehthing is wrong");
+        process.exit(1);
+    }
+};
+getOptionTest();
+
 var getCwdTest = function(){
     bl.info('The current directory is: ' + smartcli.get.cwd().path);
 };

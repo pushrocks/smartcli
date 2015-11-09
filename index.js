@@ -95,8 +95,8 @@ var SmartcliGetters;
         smartcli.get.command = function () {
             var cliCommand = {
                 specified: smartcli.check.commandPresence(),
-                name: plugins.argv._[1],
-                arguments: smartcli.get.commandArguments(1)
+                name: plugins.argv._[0],
+                arguments: smartcli.get.commandArgs()
             };
             return cliCommand;
         };
@@ -122,20 +122,30 @@ var SmartcliGetters;
             return commandArgument;
         };
         /**
-         *
+         * returns array with commandArgs
          * @returns {CliCommandArgument[]}
          */
         smartcli.get.commandArgs = function () {
             var commandArgs = [];
-            for (var command in plugins.argv._)
-                return commandArgs;
+            var argsArray = smartcli.get.commandArray().slice(0);
+            argsArray.shift();
+            for (var item in argsArray) {
+                var commandArgument = {
+                    specified: true,
+                    name: argsArray[item],
+                    level: item + 1
+                };
+                commandArgs.push(commandArgument);
+            }
+            return commandArgs;
         };
         /**
          * returns complete command array
          * @returns {any}
          */
         smartcli.get.commandArray = function () {
-            return plugins.argv._;
+            var commandArray = plugins.argv._;
+            return commandArray;
         };
         /**
          * returns a cli option
@@ -148,7 +158,7 @@ var SmartcliGetters;
                 specified: false,
                 value: false
             };
-            if (plugins.argv.hasOwnProperty(optionName)) {
+            if (plugins.smartparam.exists(plugins.argv, optionName)) {
                 cliOption.name = optionName;
                 cliOption.specified = true;
                 cliOption.value = plugins.argv[optionName]; //we already know from the "if" above that the value is available.
