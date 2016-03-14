@@ -1,4 +1,4 @@
-/// <reference path="./index.ts" />
+/// <reference path="typings/main.d.ts" />
 module SmartcliGetters {
     export function init() {
         smartcli.get = {};

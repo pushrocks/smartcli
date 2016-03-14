@@ -1,14 +1,8 @@
-/// <reference path="./index.ts" />
+/// <reference path="typings/main.d.ts" />
 
-module smartcliPlugins {
-    var plugins:any = {};
-    export function init() {
-        plugins.path = require("path");
-        plugins.beautylog = require("beautylog")("os");
-        plugins.cliff = require("cliff");
-        plugins.inquirer = require("inquirer");
-        plugins.smartparam = require("smartparam");
-        plugins.argv = require('yargs').argv;
-        return plugins;
-    }
-}
+export let path = require("path");
+export let beautylog = require("beautylog");
+export let cliff = require("cliff");
+export let inquirer = require("inquirer");
+export let smartparam = require("smartparam");
+export let argv = require('yargs').argv;

@@ -4,8 +4,8 @@
   "description": "nodejs wrapper for CLI related tasks",
   "main": "index.js",
   "scripts": {
-    "test": "(cd ts/compile && node compile.js) && (node test.js jazz jam --awesome --silent)",
-    "mtest": "(cd ts/compile && gulp) && (node test.js jazz jam --awesome)",
+    "test": "(npmts)",
+    "testm": "(cd ts/compile && gulp) && (node test.js jazz jam --awesome)",
     "devTest": "(npm test) && (node test.js --test true)",
     "reinstall": "(rm -r node_modules && npm install)",
     "release": "(git pull origin master && npm version patch && git push origin master && git checkout release && git merge master && git push origin release && git checkout master)",
@@ -27,14 +27,15 @@
   },
   "homepage": "https://github.com/pushrocks/smartcli",
   "dependencies": {
-    "beautylog": "1.0.2",
+    "beautylog": "3.1.2",
     "cliff": "^0.1.10",
-    "inquirer": "^0.11.0",
+    "inquirer": "^0.12.0",
     "smartparam": "0.0.7",
-    "yargs": "^3.29.0"
+    "yargs": "^4.1.0"
   },
   "devDependencies": {
-    "gulp": "3.9.0",
-    "gulp-typescript": "2.9.2"
+    "gulp": "3.9.1",
+    "gulp-typescript": "2.11.0",
+    "npmts": "^3.1.2"
   }
 }

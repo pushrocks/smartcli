@@ -1,4 +1,4 @@
-/// <reference path="./index.ts" />
+/// <reference path="typings/main.d.ts" />
 module SmartcliInteraction {
     export function init(){
 
