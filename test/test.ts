@@ -1,38 +1,26 @@
-/// <reference path="typings/main.d.ts" />
-var smartcli = require("../index.js");
-var beautylog = require("beautylog");
-
-var commandsString:string = 'You specified the following commands:';
-var commands = smartcli.get.commandArray();
-for (var key in commands) {
-    commandsString = commandsString + ' ' + commands[key];
-}
-beautylog.log(commandsString);
-
+/// <reference path="../ts/typings/main.d.ts" />
+let smartcli = require("../dist/index.js");
+let should = req
 
 /* ------------------------------------------------------------------ *
  * ------------------- CHECKS TESTS --------------------------------- *
  * ------------------------------------------------------------------ */
 
-
-/**
- *
- */
-var checkCommandTest = function() {
-    if (smartcli.check.command('jazz')) {
-        beautylog.success('One of your commands is jazz. It is supposed to be there. Perfect!');
-    } else {
-        beautylog.error('None of your commands is jazz. You need to check this');
-        process.exit(1);
-    }
-    if (!smartcli.check.command('punk')) {
-        beautylog.success('None of your commands is punk. It is not supposed to be there. Perfect!');
-    } else {
-        beautylog.error('One of your commands seems to be punk. Something is wrong here');
-        process.exit(1);
-    }
-};
-checkCommandTest();
+describe("smartcli",function(){
+    describe(".check",function(){
+        describe(".command",function(){
+            it("should return true when specified command is found",function(){
+                smartcli.check.command("jazz").should.be.true();
+            });
+            it("should return false when specified command is NOT found",function(){
+                smartcli.check.command("rock").should.be.false();
+            });
+        }); 
+        describe(".commandPresence",function(){
+            
+        });
+    });
+});
 
 
 var checkCommandPresenceTest = function() {

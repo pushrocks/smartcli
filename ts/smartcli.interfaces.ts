@@ -1,5 +1,3 @@
-/// <reference path="typings/main.d.ts" />
-
 interface CliOption {
     name: string;
     specified:boolean;

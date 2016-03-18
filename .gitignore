@@ -7,3 +7,5 @@ docs/
 
 ts/*.js
 ts/*.js.map
+ts/typings/
+
