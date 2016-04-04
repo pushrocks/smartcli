@@ -1,13 +1,14 @@
 # smartcli
-nodejs wrapper for CLI related tasks  
-[![Dev Status](https://img.shields.io/badge/DevStatus-Active-green.svg)](https://github.com/pushrocks/smartcli/commits/dev)
+nodejs wrapper for CLI related tasks
 
-## Buildstatus/Dependencies
+## Status
 [![Build Status](https://travis-ci.org/pushrocks/smartcli.svg?branch=master)](https://travis-ci.org/pushrocks/smartcli)
-[![devDependency Status](https://david-dm.org/pushrocks/smartcli/dev-status.svg)](https://david-dm.org/pushrocks/smartcli#info=devDependencies)
+[![Dependency Status](https://david-dm.org/pushrocks/smartcli.svg)](https://david-dm.org/pushrocks/smartcli)
+[![bitHound Overall Score](https://www.bithound.io/github/pushrocks/smartcli/badges/score.svg)](https://www.bithound.io/github/pushrocks/smartcli)
+[![bitHound Code](https://www.bithound.io/github/pushrocks/smartcli/badges/code.svg)](https://www.bithound.io/github/pushrocks/smartcli)
 
 ## Install the package
-    npm install smartcli
+    npm install smartcli --save
 
 ## Usage
 
@@ -53,5 +54,3 @@ smartcli.check.command('jazz');
 smartcli.get.option('myoption');
 ```
 
-Cheers
-Phil from Lossless Digital

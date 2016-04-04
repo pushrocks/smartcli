@@ -23,15 +23,6 @@ describe("smartcli",function(){
 });
 
 
-var checkCommandPresenceTest = function() {
-    if (smartcli.check.commandPresence()) {
-        beautylog.success('There are commands present, like supposed to. Perfect!');
-    } else {
-        beautylog.error('There do not seem to be any commands present... This is wrong');
-        process.exit(1);
-    }
-};
-checkCommandPresenceTest();
 
 
 var checkCommandArgumentTest = function() {
