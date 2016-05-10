@@ -27,13 +27,13 @@
   },
   "homepage": "https://github.com/pushrocks/smartcli",
   "dependencies": {
-    "beautylog": "4.1.2",
+    "beautylog": "^4.1.6",
     "cliff": "^0.1.10",
-    "inquirer": "^0.12.0",
+    "inquirer": "^1.0.2",
     "smartparam": "0.0.7",
-    "yargs": "^4.3.2"
+    "yargs": "^4.7.0"
   },
   "devDependencies": {
-    "npmts": "^5.0.3"
+    "npmts": "^5.1.5"
   }
 }
