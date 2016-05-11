@@ -48,11 +48,11 @@ export let commandArgs = function():CliCommandArgument[] {
     var commandArgs:CliCommandArgument[] = [];
     var argsArray = commandArray().slice(0);
     argsArray.shift();
-    for (var item in argsArray){
-        var commandArgument:CliCommandArgument = {
+    for (let item in argsArray){
+        let commandArgument:CliCommandArgument = {
             specified:true,
             name:argsArray[item],
-            level: item + 1
+            level: parseInt(item) + 1
         }
         commandArgs.push(commandArgument);
     }
