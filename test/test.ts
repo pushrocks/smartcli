@@ -1,6 +1,7 @@
 /// <reference path="../ts/typings/main.d.ts" />
 let smartcli = require("../dist/index.js");
-let should = req
+let beautylog = require("beautylog");
+let should = require("should");
 
 /* ------------------------------------------------------------------ *
  * ------------------- CHECKS TESTS --------------------------------- *

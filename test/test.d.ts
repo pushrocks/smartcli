@@ -1,4 +1,5 @@
 declare let smartcli: any;
+declare let beautylog: any;
 declare let should: any;
 declare var checkCommandArgumentTest: () => void;
 declare var checkCommandArgumentPresenceTest: () => void;
