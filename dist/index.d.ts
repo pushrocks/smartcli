@@ -1,4 +1,3 @@
-/// <reference path="smartcli.interfaces.d.ts" />
 import SmartcliChecks = require("./smartcli.checks");
 import SmartcliGetters = require("./smartcli.getters");
 import SmartcliInteractions = require("./smartcli.interaction");

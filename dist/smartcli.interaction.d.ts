@@ -1,4 +1,4 @@
-/// <reference path="smartcli.interfaces.d.ts" />
+import "./smartcli.interfaces";
 /**
  * executes callback with answer to question as argument
  * @param questionString the question you want to ask the user

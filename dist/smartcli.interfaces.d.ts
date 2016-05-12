@@ -1,17 +1,17 @@
-interface CliOption {
+export interface CliOption {
     name: string;
     specified: boolean;
     value: any;
 }
-interface Directory {
+export interface Directory {
     path: string;
 }
-interface CliCommand {
+export interface CliCommand {
     specified: boolean;
     name: string;
     arguments: CliCommandArgument[];
 }
-interface CliCommandArgument {
+export interface CliCommandArgument {
     specified: boolean;
     name: string;
     level: number;

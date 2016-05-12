@@ -1,5 +1,5 @@
 # smartcli
-nodejs wrapper for CLI related tasks
+nodejs wrapper for CLI related tasks. TypeScript ready.
 
 ## Status
 [![Build Status](https://travis-ci.org/pushrocks/smartcli.svg?branch=master)](https://travis-ci.org/pushrocks/smartcli)
@@ -36,21 +36,17 @@ mytool function argument1 argument2 --option1 option1Value --option2 option2Valu
 * async interaction functions
   * are grouped in **smartcli.interaction** object
 
-```js
-var smartcli = require("smartcli");
+
+### Methods
+The examples are written in TypeScript
+```typescript
+import * as smartcli from  "smartcli"
 
 /* -------------- Check Functions -------------------*/
-//returns true for terminal command "node myjs.js jazz"
-smartcli.check.command('jazz'); 
-
-/**
-* returns an object for terminal command "node myjs.js --myoption something" like so
-* {
-*   name: 'myoption',
-*   specified: true,
-*   value: 'something'
-* }
-*/
-smartcli.get.option('myoption');
+smartcli.check.command("jazz"); // check  for a special command.
+smartcli.check.commandPresence() // check if any command is specified
+smartcli.check.commandArguemnt("myargument") // checks if a special argument is given
+smartcli.check.commandArguemntPresence // checks of any Argument is present
+smartcli.get.option('myoption'); // 
 ```
 

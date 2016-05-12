@@ -1,6 +1,6 @@
 /// <reference path="typings/main.d.ts" />
-/// <reference path="./smartcli.interfaces.ts" />
 
+import "./smartcli.interfaces";
 import plugins = require("./smartcli.plugins");
 
 /**

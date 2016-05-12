@@ -1,6 +1,6 @@
 /// <reference path="typings/main.d.ts" />
-/// <reference path="./smartcli.interfaces.ts" />
 
+import * as interfaces from "./smartcli.interfaces";
 import plugins = require("./smartcli.plugins");
 import SmartcliChecks = require("./smartcli.checks");
 
@@ -9,7 +9,7 @@ import SmartcliChecks = require("./smartcli.checks");
  * @param commandString
  * @returns {{specified: boolean, name: any, arguments: CliCommandArgument}}
  */
-export let command = function():CliCommand {
+export let command = function():interfaces.CliCommand {
     var cliCommand = {
         specified: SmartcliChecks.commandPresence(),
         name: plugins.argv._[0],
@@ -23,8 +23,8 @@ export let command = function():CliCommand {
  * @param argumentLevel
  * @returns {{specified: (boolean|boolean), name}}
  */
-export let commandArgument = function(argumentLevel):CliCommandArgument {
-    var commandArgument:CliCommandArgument = {
+export let commandArgument = function(argumentLevel):interfaces.CliCommandArgument {
+    var commandArgument:interfaces.CliCommandArgument = {
         specified: false,
         name: "undefined",
         level:argumentLevel
@@ -44,12 +44,12 @@ export let commandArgument = function(argumentLevel):CliCommandArgument {
  * returns array with commandArgs
  * @returns {CliCommandArgument[]}
  */
-export let commandArgs = function():CliCommandArgument[] {
-    var commandArgs:CliCommandArgument[] = [];
+export let commandArgs = function():interfaces.CliCommandArgument[] {
+    var commandArgs:interfaces.CliCommandArgument[] = [];
     var argsArray = commandArray().slice(0);
     argsArray.shift();
     for (let item in argsArray){
-        let commandArgument:CliCommandArgument = {
+        let commandArgument:interfaces.CliCommandArgument = {
             specified:true,
             name:argsArray[item],
             level: parseInt(item) + 1
@@ -74,8 +74,8 @@ export let commandArray = function ():string[] {
  * @param optionName
  * @returns {CliOption}
  */
-export let option = function(optionName:string):CliOption {
-    var cliOption:CliOption = {
+export let option = function(optionName:string):interfaces.CliOption {
+    var cliOption:interfaces.CliOption = {
         name:optionName,
         specified: false,
         value: false
@@ -103,7 +103,7 @@ export let options = function() {
  * returns Directory of cwd
  * @returns {{path: string}}
  */
-export let cwd = function():Directory {
+export let cwd = function():interfaces.Directory {
     return {
         path: process.cwd()
     }

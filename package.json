@@ -29,6 +29,7 @@
   "dependencies": {
     "beautylog": "^4.1.6",
     "cliff": "^0.1.10",
+    "commander": "^2.9.0",
     "inquirer": "^1.0.2",
     "smartparam": "0.0.7",
     "yargs": "^4.7.0"

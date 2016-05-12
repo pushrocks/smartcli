@@ -1,4 +1,4 @@
-/// <reference path="smartcli.interfaces.d.ts" />
+import "./smartcli.interfaces";
 /**
  * checks for a special command string and returns true if found.
  * @param commandString
