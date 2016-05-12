@@ -45,8 +45,10 @@ import * as smartcli from  "smartcli"
 /* -------------- Check Functions -------------------*/
 smartcli.check.command("jazz"); // check  for a special command.
 smartcli.check.commandPresence() // check if any command is specified
-smartcli.check.commandArguemnt("myargument") // checks if a special argument is given
+smartcli.check.commandArguemnt("myargument",1) // checks if a special argument is given, second argument is level
 smartcli.check.commandArguemntPresence // checks of any Argument is present
+smartcli.check.option("someoption") // checks for a specific option
+smartcli.check.optionPresence() // checks if any option is specified
 smartcli.get.option('myoption'); // 
 ```
 
