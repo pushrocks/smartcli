@@ -1,6 +1,7 @@
-import SmartcliChecks = require("./smartcli.checks");
-import SmartcliGetters = require("./smartcli.getters");
-import SmartcliInteractions = require("./smartcli.interaction");
+import * as SmartcliChecks from "./smartcli.checks";
+import * as SmartcliGetters from "./smartcli.getters";
+import * as SmartcliInteractions from "./smartcli.interaction";
+export declare let commander: any;
 export declare let inquirer: any;
 export declare let cliff: any;
 export declare let argv: any;

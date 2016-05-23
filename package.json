@@ -2,7 +2,8 @@
   "name": "smartcli",
   "version": "0.0.13",
   "description": "nodejs wrapper for CLI related tasks",
-  "main": "index.js",
+  "main": "dist/index.js",
+  "typings":"dist/index.d.ts",
   "scripts": {
     "test": "(npmts)",
     "testm": "(cd ts/compile && gulp) && (node test.js jazz jam --awesome)",
@@ -27,15 +28,15 @@
   },
   "homepage": "https://github.com/pushrocks/smartcli",
   "dependencies": {
-    "beautylog": "^4.1.6",
+    "beautylog": "^5.0.5",
     "cliff": "^0.1.10",
     "commander": "^2.9.0",
     "inquirer": "^1.0.2",
     "smartparam": "0.0.7",
-    "yargs": "^4.7.0"
+    "yargs": "^4.7.1"
   },
   "devDependencies": {
-    "npmts": "^5.1.5",
-    "should": "^8.3.1"
+    "npmts": "^5.1.11",
+    "should": "^8.4.0"
   }
 }
