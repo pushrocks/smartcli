@@ -1,3 +1,4 @@
+/// <reference path="../ts/typings/index.d.ts" />
 declare let smartcli: any;
 declare let beautylog: any;
 declare let should: any;
