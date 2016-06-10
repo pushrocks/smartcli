@@ -23,7 +23,7 @@ export class Smartcli {
         this.parseStarted.promise
             .then(() => {
                 if (this.argv._.indexOf(definitionArg.commandName) == 0) {
-                    done.resolve();
+                    done.resolve(this.argv);
                 } else {
                     return done.reject();
                 }
