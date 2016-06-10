@@ -1,6 +1,6 @@
 import "typings-global";
 
-export let argv = require('yargs').argv;
+export let argv = require('yargs');
 export let beautylog = require("beautylog");
 export let cliff = require("cliff");
 export let inquirer = require("inquirer");
