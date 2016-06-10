@@ -20,7 +20,7 @@ export class Smartcli {
     };
     addCommand(definitionArg:{commandName:string}){
         let done = plugins.q.defer();
-        this.parseStarted
+        this.parseStarted.promise
             .then(() => {
                 if (this.argv._.indexOf(definitionArg.commandName) == 0) {
                     done.resolve();
@@ -35,16 +35,19 @@ export class Smartcli {
     };
     addVersion(versionArg:string){
         this.version = versionArg;
-        this.parseStarted
+        this.addAlias("v","version");
+        this.parseStarted.promise
             .then(() => {
-
+                if(this.argv.v){
+                    console.log(this.version);
+                }
             })
     }
     standardTask(){
         let done = plugins.q.defer();
-        this.parseStarted
+        this.parseStarted.promise
             .then(() => {
-                if(plugins.argv._.length == 0 || this.commands.length == 0){
+                if(this.argv._.length == 0 || !this.argv.v){
                     done.resolve();
                 } else {
                     done.reject();
@@ -53,6 +56,7 @@ export class Smartcli {
         return done.promise;
     }
     startParse(){
+        this.argv = this.argv.argv;
         this.parseStarted.resolve();
     }
 
