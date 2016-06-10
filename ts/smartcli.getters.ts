@@ -4,19 +4,6 @@ import * as interfaces from "./smartcli.interfaces";
 import plugins = require("./smartcli.plugins");
 import SmartcliChecks = require("./smartcli.checks");
 
-/**
- *
- * @param commandString
- * @returns {{specified: boolean, name: any, arguments: CliCommandArgument}}
- */
-export let command = function():interfaces.CliCommand {
-    var cliCommand = {
-        specified: SmartcliChecks.commandPresence(),
-        name: plugins.argv._[0],
-        arguments: commandArgs()
-    }
-    return cliCommand;
-};
 
 /**
  * gets the second or higher value of plugins.argv._ if specified and returns it as commandArgument

@@ -15,7 +15,7 @@ export let getAnswer = function(questionString:string, cb) {
         return null;
     }
     //make inquirer compatible question object
-    var question = {
+    let question = {
         type: "input",
         name: "userFeedback",
         message: questionString,
@@ -25,7 +25,7 @@ export let getAnswer = function(questionString:string, cb) {
     };
 
     plugins.inquirer.prompt([question],function(answers){
-        var answer = answers.userFeedback;
+        let answer = answers.userFeedback;
         cb(answer);
     });
 };
@@ -43,7 +43,7 @@ export let getChoice = function(questionString:string, choiceOptions:string[], c
     }
 
     //make inquirer compatible question object
-    var question = {
+    let question = {
         type: "list",
         name: "userFeedback",
         message: questionString,
@@ -52,7 +52,7 @@ export let getChoice = function(questionString:string, choiceOptions:string[], c
     };
 
     plugins.inquirer.prompt(question,function(answers){
-        var answer = answers.userFeedback;
+        let answer = answers.userFeedback;
         cb(answer);
     });
 

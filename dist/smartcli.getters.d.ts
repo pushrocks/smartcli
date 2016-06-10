@@ -1,10 +1,5 @@
+import "typings-global";
 import * as interfaces from "./smartcli.interfaces";
-/**
- *
- * @param commandString
- * @returns {{specified: boolean, name: any, arguments: CliCommandArgument}}
- */
-export declare let command: () => interfaces.CliCommand;
 /**
  * gets the second or higher value of plugins.argv._ if specified and returns it as commandArgument
  * @param argumentLevel

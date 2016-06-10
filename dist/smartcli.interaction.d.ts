@@ -1,3 +1,4 @@
+import "typings-global";
 import "./smartcli.interfaces";
 /**
  * executes callback with answer to question as argument

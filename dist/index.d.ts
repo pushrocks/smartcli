@@ -1,10 +1,2 @@
-import * as SmartcliChecks from "./smartcli.checks";
-import * as SmartcliGetters from "./smartcli.getters";
-import * as SmartcliInteractions from "./smartcli.interaction";
-export declare let commander: any;
-export declare let inquirer: any;
-export declare let cliff: any;
-export declare let argv: any;
-export declare let check: typeof SmartcliChecks;
-export declare let get: typeof SmartcliGetters;
-export declare let interaction: typeof SmartcliInteractions;
+import "typings-global";
+export { Smartcli } from "./smartcli.classes.smartcli";

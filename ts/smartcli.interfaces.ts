@@ -1,5 +1,11 @@
 import "typings-global";
 
+export interface CliCommand {
+    specified: boolean;
+    name: string;
+    arguments:CliCommandArgument[];
+}
+
 export interface CliOption {
     name: string;
     specified:boolean;
@@ -8,12 +14,6 @@ export interface CliOption {
 
 export interface Directory {
     path: string;
-}
-
-export interface CliCommand {
-    specified: boolean;
-    name: string;
-    arguments:CliCommandArgument[];
 }
 
 export interface CliCommandArgument {

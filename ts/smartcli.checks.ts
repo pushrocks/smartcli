@@ -3,28 +3,6 @@ import "typings-global";
 import "./smartcli.interfaces";
 import plugins = require("./smartcli.plugins");
 
-/**
- * checks for a special command string and returns true if found.
- * @param commandString
- * @returns {boolean}
- */
-export let command = function(commandString:string):boolean {
-    if (plugins.argv._.indexOf(commandString) == 0) {
-        return true
-    }
-    return false;
-};
-
-/**
- * checks if a command is present, returns true if yes, false if no.
- * @returns {boolean}
- */
-export let commandPresence = function():boolean {
-    if(plugins.argv._.length > 0){
-        return true;
-    }
-    return false;
-};
 
 /**
  * checks for an special command argument at a certain position, returns true if matches, returns false if not

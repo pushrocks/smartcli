@@ -30,8 +30,8 @@
   "dependencies": {
     "beautylog": "^5.0.8",
     "cliff": "^0.1.10",
-    "commander": "^2.9.0",
     "inquirer": "^1.0.3",
+    "q": "^1.4.1",
     "smartparam": "0.0.7",
     "typings-global": "^1.0.3",
     "yargs": "^4.7.1"
