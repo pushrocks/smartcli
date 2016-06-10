@@ -47,7 +47,7 @@ export class Smartcli {
         let done = plugins.q.defer();
         this.parseStarted.promise
             .then(() => {
-                if(this.argv._.length == 0 || !this.argv.v){
+                if(this.argv._.length == 0 && !this.argv.v){
                     done.resolve();
                 } else {
                     done.reject();
