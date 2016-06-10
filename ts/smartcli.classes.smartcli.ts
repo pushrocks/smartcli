@@ -1,3 +1,5 @@
-export class smartcli {
+import "typings-global";
+
+export class Smartcli {
     
 }

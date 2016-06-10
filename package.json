@@ -3,7 +3,7 @@
   "version": "0.0.13",
   "description": "nodejs wrapper for CLI related tasks",
   "main": "dist/index.js",
-  "typings":"dist/index.d.ts",
+  "typings": "dist/index.d.ts",
   "scripts": {
     "test": "(npmts)",
     "testm": "(cd ts/compile && gulp) && (node test.js jazz jam --awesome)",
@@ -33,10 +33,12 @@
     "commander": "^2.9.0",
     "inquirer": "^1.0.3",
     "smartparam": "0.0.7",
+    "typings-global": "^1.0.3",
     "yargs": "^4.7.1"
   },
   "devDependencies": {
     "npmts": "^5.2.5",
-    "should": "^9.0.1"
+    "should": "^9.0.1",
+    "typings-test": "^1.0.1"
   }
 }

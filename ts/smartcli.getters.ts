@@ -1,4 +1,4 @@
-/// <reference path="typings/index.d.ts" />
+import "typings-global";
 
 import * as interfaces from "./smartcli.interfaces";
 import plugins = require("./smartcli.plugins");

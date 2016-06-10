@@ -1,10 +1,13 @@
-/// <reference path="typings/index.d.ts" />
+import "typings-global";
 
 import * as interfaces from "./smartcli.interfaces"
 import * as plugins from "./smartcli.plugins"
 import * as SmartcliChecks from "./smartcli.checks";
 import * as SmartcliGetters from "./smartcli.getters";
 import * as SmartcliInteractions from "./smartcli.interaction";
+
+import {Smartcli} from "./smartcli.classes.smartcli";
+export {Smartcli} from "./smartcli.classes.smartcli";
 
 /* ------------------------------------------------ *
  * ---------- plugins for direct use -------------- *

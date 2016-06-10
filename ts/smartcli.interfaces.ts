@@ -1,3 +1,5 @@
+import "typings-global";
+
 export interface CliOption {
     name: string;
     specified:boolean;

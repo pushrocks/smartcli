@@ -1,4 +1,4 @@
-/// <reference path="typings/index.d.ts" />
+import "typings-global";
 
 export let path = require("path");
 export let beautylog = require("beautylog");
