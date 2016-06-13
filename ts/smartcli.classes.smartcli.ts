@@ -25,7 +25,7 @@ export class Smartcli {
                 if (this.argv._.indexOf(definitionArg.commandName) == 0) {
                     done.resolve(this.argv);
                 } else {
-                    return done.reject();
+                    done.reject(this.argv);
                 }
             });
         return done.promsise;
