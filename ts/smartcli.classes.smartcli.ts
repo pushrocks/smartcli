@@ -1,6 +1,6 @@
 import "typings-global";
 
-import * as plugins from "./smartcli.plugins"
+import * as plugins from "./smartcli.plugins";
 import * as SmartcliInteractions from "./smartcli.interaction";
 
 export class Smartcli {
@@ -33,6 +33,9 @@ export class Smartcli {
     addQuestion(definitionArg:{questionString:string,questionType:string}){
         
     };
+    addHelp(){
+
+    }
     addVersion(versionArg:string){
         this.version = versionArg;
         this.addAlias("v","version");
