@@ -15,6 +15,7 @@ export declare class Smartcli {
         questionString: string;
         questionType: string;
     }): void;
+    addHelp(): void;
     addVersion(versionArg: string): void;
     standardTask(): any;
     startParse(): void;

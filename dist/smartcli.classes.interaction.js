@@ -1,0 +1,10 @@
+"use strict";
+require("typings-global");
+var Question = (function () {
+    function Question() {
+    }
+    return Question;
+}());
+exports.Question = Question;
+
+//# sourceMappingURL=data:application/json;charset=utf8;base64,eyJ2ZXJzaW9uIjozLCJzb3VyY2VzIjpbInNtYXJ0Y2xpLmNsYXNzZXMuaW50ZXJhY3Rpb24udHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6IjtBQUFBLFFBQU8sZ0JBQWdCLENBQUMsQ0FBQTtBQUd4QjtJQUNJO0lBRUEsQ0FBQztJQUNMLGVBQUM7QUFBRCxDQUpBLEFBSUMsSUFBQTtBQUpZLGdCQUFRLFdBSXBCLENBQUEiLCJmaWxlIjoic21hcnRjbGkuY2xhc3Nlcy5pbnRlcmFjdGlvbi5qcyIsInNvdXJjZXNDb250ZW50IjpbImltcG9ydCBcInR5cGluZ3MtZ2xvYmFsXCI7XG5pbXBvcnQgKiBhcyBwbHVnaW5zIGZyb20gXCIuL3NtYXJ0Y2xpLnBsdWdpbnNcIjtcblxuZXhwb3J0IGNsYXNzIFF1ZXN0aW9uIHtcbiAgICBjb25zdHJ1Y3Rvcigpe1xuICAgICAgICBcbiAgICB9XG59Il19

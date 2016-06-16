@@ -1,7 +1,7 @@
 import "typings-global";
 
 import * as plugins from "./smartcli.plugins";
-import * as SmartcliInteractions from "./smartcli.interaction";
+import {Question} from "./smartcli.classes.interaction";
 
 export class Smartcli {
     argv;
@@ -51,9 +51,9 @@ export class Smartcli {
         this.parseStarted.promise
             .then(() => {
                 if(this.argv._.length == 0 && !this.argv.v){
-                    done.resolve();
+                    done.resolve(this.argv);
                 } else {
-                    done.reject();
+                    done.reject(this.argv);
                 };
             });
         return done.promise;
