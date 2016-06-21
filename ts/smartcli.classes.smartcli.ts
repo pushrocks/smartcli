@@ -30,6 +30,9 @@ export class Smartcli {
             });
         return done.promsise;
     };
+    getCommandPromise(commandNameArg){
+        //TODO
+    }
     addQuestion(definitionArg:{questionString:string,questionType:string}){
         
     };
