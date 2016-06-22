@@ -28,7 +28,7 @@ export class Smartcli {
                     done.reject(this.argv);
                 }
             });
-        return done.promsise;
+        return done.promise;
     };
     getCommandPromise(commandNameArg){
         //TODO
