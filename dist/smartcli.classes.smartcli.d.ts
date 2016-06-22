@@ -11,6 +11,7 @@ export declare class Smartcli {
     addCommand(definitionArg: {
         commandName: string;
     }): any;
+    getCommandPromise(commandNameArg: any): void;
     addQuestion(definitionArg: {
         questionString: string;
         questionType: string;
