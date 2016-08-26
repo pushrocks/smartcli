@@ -1,6 +1,11 @@
 /// <reference types="q" />
 import "typings-global";
 import * as plugins from "./smartcli.plugins";
+import { Objectmap } from "lik";
+export interface commandPromiseObject {
+    commandName: string;
+    promise: plugins.q.Promise<any>;
+}
 export declare class Smartcli {
     argv: any;
     questionsDone: any;
@@ -8,6 +13,7 @@ export declare class Smartcli {
     commands: any;
     questions: any;
     version: string;
+    allCommandPromises: Objectmap<commandPromiseObject>;
     constructor();
     /**
      * adds an alias, meaning one equals the other in terms of triggering associated commands
@@ -24,13 +30,20 @@ export declare class Smartcli {
     /**
      * gets a Promise for a command word
      */
-    getCommandPromise(commandNameArg: any): void;
-    addQuestion(definitionArg: {
-        questionString: string;
-        questionType: string;
+    getCommandPromiseByName(commandNameArg: string): plugins.q.Promise<any>;
+    /**
+     * allows to specify help text to be printed above the rest of the help text
+     */
+    addHelp(optionsArg: {
+        helpText: string;
     }): void;
-    addHelp(): void;
+    /**
+     * specify version to be printed for -v --version
+     */
     addVersion(versionArg: string): void;
+    /**
+     * returns promise that is resolved when no commands are specified
+     */
     standardTask(): plugins.q.Promise<{}>;
     startParse(): void;
 }

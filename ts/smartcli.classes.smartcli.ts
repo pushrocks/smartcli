@@ -1,7 +1,16 @@
 import "typings-global";
 
 import * as plugins from "./smartcli.plugins";
-import {Question} from "./smartcli.classes.interaction";
+import * as interaction from "./smartcli.classes.interaction";
+
+// import classes
+import {Objectmap} from "lik";
+
+// interfaces
+export interface commandPromiseObject {
+    commandName:string;
+    promise: plugins.q.Promise<any>;
+};
 
 export class Smartcli {
     argv;
@@ -10,6 +19,9 @@ export class Smartcli {
     commands;
     questions;
     version:string;
+
+    // maps
+    allCommandPromises = new Objectmap<commandPromiseObject>();
     constructor(){
         this.argv = plugins.argv;
         this.questionsDone = plugins.q.defer();
@@ -44,15 +56,28 @@ export class Smartcli {
     /**
      * gets a Promise for a command word
      */
-    getCommandPromise(commandNameArg){
-        //TODO
-    }
-    addQuestion(definitionArg:{questionString:string,questionType:string}){
-        
+    getCommandPromiseByName(commandNameArg:string){
+        return this.allCommandPromises.find(commandPromiseObjectArg => {
+            return commandPromiseObjectArg.commandName === commandNameArg;
+        }).promise;
     };
-    addHelp(){
 
-    }
+    /**
+     * allows to specify help text to be printed above the rest of the help text
+     */
+    addHelp(optionsArg:{
+        helpText:string
+    }){
+        this.addCommand({
+            commandName:"help"
+        }).then(argvArg => {
+            plugins.beautylog.log(optionsArg.helpText);
+        })
+    };
+
+    /**
+     * specify version to be printed for -v --version
+     */
     addVersion(versionArg:string){
         this.version = versionArg;
         this.addAlias("v","version");
@@ -62,7 +87,11 @@ export class Smartcli {
                     console.log(this.version);
                 }
             })
-    }
+    };
+
+    /**
+     * returns promise that is resolved when no commands are specified
+     */
     standardTask(){
         let done = plugins.q.defer();
         this.parseStarted.promise

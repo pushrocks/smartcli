@@ -28,7 +28,8 @@
   },
   "homepage": "https://gitlab.com/pushrocks/smartcli",
   "dependencies": {
-    "@types/q": "0.0.30",
+    "@types/inquirer": "0.x.x",
+    "@types/q": "0.x.x",
     "beautylog": "^5.0.20",
     "cliff": "^0.1.10",
     "inquirer": "^1.1.2",
