@@ -28,17 +28,19 @@
   },
   "homepage": "https://gitlab.com/pushrocks/smartcli",
   "dependencies": {
-    "beautylog": "^5.0.12",
+    "@types/q": "0.0.30",
+    "beautylog": "^5.0.20",
     "cliff": "^0.1.10",
-    "inquirer": "^1.0.3",
+    "inquirer": "^1.1.2",
+    "lik": "^1.0.15",
     "q": "^1.4.1",
-    "smartparam": "0.0.7",
-    "typings-global": "^1.0.3",
-    "yargs": "^4.7.1"
+    "smartparam": "0.1.1",
+    "typings-global": "^1.0.6",
+    "yargs": "^5.0.0"
   },
   "devDependencies": {
-    "npmts-g": "^5.2.6",
-    "should": "^9.0.2",
+    "npmts-g": "^5.2.8",
+    "should": "^11.1.0",
     "typings-test": "^1.0.1"
   }
 }

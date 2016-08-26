@@ -14,10 +14,20 @@ export class Smartcli {
         this.argv = plugins.argv;
         this.questionsDone = plugins.q.defer();
         this.parseStarted = plugins.q.defer();
-    }
+    };
+
+    /**
+     * adds an alias, meaning one equals the other in terms of triggering associated commands
+     */
     addAlias(keyArg,aliasArg){
         this.argv = this.argv.alias(keyArg,aliasArg);
     };
+
+    /**
+     * adds a Command by returning a Promise that reacts to the specific commandString given.
+     * 
+     * Note: in e.g. "npm install something" the "install" is considered the command.
+     */
     addCommand(definitionArg:{commandName:string}){
         let done = plugins.q.defer();
         this.parseStarted.promise
@@ -30,6 +40,10 @@ export class Smartcli {
             });
         return done.promise;
     };
+
+    /**
+     * gets a Promise for a command word
+     */
     getCommandPromise(commandNameArg){
         //TODO
     }

@@ -1,9 +1,10 @@
 import "typings-global";
 
 export let argv = require('yargs');
-export let beautylog = require("beautylog");
+export import beautylog = require("beautylog");
 export let cliff = require("cliff");
 export let inquirer = require("inquirer");
+export import lik = require("lik");
 export let path = require("path");
-export let q = require("q");
-export let smartparam = require("smartparam");
+export import q = require("q");
+export import smartparam = require("smartparam");

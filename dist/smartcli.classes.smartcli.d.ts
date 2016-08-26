@@ -1,4 +1,6 @@
+/// <reference types="q" />
 import "typings-global";
+import * as plugins from "./smartcli.plugins";
 export declare class Smartcli {
     argv: any;
     questionsDone: any;
@@ -7,10 +9,21 @@ export declare class Smartcli {
     questions: any;
     version: string;
     constructor();
+    /**
+     * adds an alias, meaning one equals the other in terms of triggering associated commands
+     */
     addAlias(keyArg: any, aliasArg: any): void;
+    /**
+     * adds a Command by returning a Promise that reacts to the specific commandString given.
+     *
+     * Note: in e.g. "npm install something" the "install" is considered the command.
+     */
     addCommand(definitionArg: {
         commandName: string;
-    }): any;
+    }): plugins.q.Promise<{}>;
+    /**
+     * gets a Promise for a command word
+     */
     getCommandPromise(commandNameArg: any): void;
     addQuestion(definitionArg: {
         questionString: string;
@@ -18,6 +31,6 @@ export declare class Smartcli {
     }): void;
     addHelp(): void;
     addVersion(versionArg: string): void;
-    standardTask(): any;
+    standardTask(): plugins.q.Promise<{}>;
     startParse(): void;
 }
