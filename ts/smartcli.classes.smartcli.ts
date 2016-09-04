@@ -31,8 +31,9 @@ export class Smartcli {
     /**
      * adds an alias, meaning one equals the other in terms of triggering associated commands
      */
-    addAlias(keyArg,aliasArg){
+    addAlias(keyArg,aliasArg):void {
         this.argv = this.argv.alias(keyArg,aliasArg);
+        return;
     };
 
     /**
@@ -40,8 +41,8 @@ export class Smartcli {
      * 
      * Note: in e.g. "npm install something" the "install" is considered the command.
      */
-    addCommand(definitionArg:{commandName:string}){
-        let done = plugins.q.defer();
+    addCommand(definitionArg:{commandName:string}):plugins.q.Promise<any>{
+        let done = plugins.q.defer<any>();
         this.parseStarted.promise
             .then(() => {
                 if (this.argv._.indexOf(definitionArg.commandName) == 0) {
@@ -92,8 +93,8 @@ export class Smartcli {
     /**
      * returns promise that is resolved when no commands are specified
      */
-    standardTask(){
-        let done = plugins.q.defer();
+    standardTask():plugins.q.Promise<any>{
+        let done = plugins.q.defer<any>();
         this.parseStarted.promise
             .then(() => {
                 if(this.argv._.length == 0 && !this.argv.v){
@@ -108,9 +109,10 @@ export class Smartcli {
     /**
      * start the process of evaluating commands
      */
-    startParse(){
+    startParse():void{
         this.argv = this.argv.argv;
         this.parseStarted.resolve();
+        return;
     }
 
 }

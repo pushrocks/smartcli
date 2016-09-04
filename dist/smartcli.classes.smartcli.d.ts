@@ -26,7 +26,7 @@ export declare class Smartcli {
      */
     addCommand(definitionArg: {
         commandName: string;
-    }): plugins.q.Promise<{}>;
+    }): plugins.q.Promise<any>;
     /**
      * gets a Promise for a command word
      */
@@ -44,7 +44,7 @@ export declare class Smartcli {
     /**
      * returns promise that is resolved when no commands are specified
      */
-    standardTask(): plugins.q.Promise<{}>;
+    standardTask(): plugins.q.Promise<any>;
     /**
      * start the process of evaluating commands
      */
