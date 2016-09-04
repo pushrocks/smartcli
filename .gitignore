@@ -1,8 +1,6 @@
 node_modules/
-.settings/
-.idea/
 coverage/
-docs/
+pages/
 
 
 ts/*.js

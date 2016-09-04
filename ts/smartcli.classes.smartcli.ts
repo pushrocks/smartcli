@@ -13,7 +13,7 @@ export interface commandPromiseObject {
 };
 
 export class Smartcli {
-    argv;
+    argv:any;
     questionsDone;
     parseStarted;
     commands;
@@ -23,7 +23,7 @@ export class Smartcli {
     // maps
     allCommandPromises = new Objectmap<commandPromiseObject>();
     constructor(){
-        this.argv = plugins.argv;
+        this.argv = plugins.yargs;
         this.questionsDone = plugins.q.defer();
         this.parseStarted = plugins.q.defer();
     };
