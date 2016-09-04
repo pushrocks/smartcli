@@ -45,5 +45,8 @@ export declare class Smartcli {
      * returns promise that is resolved when no commands are specified
      */
     standardTask(): plugins.q.Promise<{}>;
+    /**
+     * start the process of evaluating commands
+     */
     startParse(): void;
 }

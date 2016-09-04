@@ -104,6 +104,10 @@ export class Smartcli {
             });
         return done.promise;
     }
+
+    /**
+     * start the process of evaluating commands
+     */
     startParse(){
         this.argv = this.argv.argv;
         this.parseStarted.resolve();
