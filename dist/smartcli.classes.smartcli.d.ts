@@ -1,10 +1,9 @@
 /// <reference types="q" />
-import "typings-global";
-import * as plugins from "./smartcli.plugins";
-import { Objectmap } from "lik";
-export interface commandPromiseObject {
+import * as q from 'q';
+import { Objectmap } from 'lik';
+export interface ICommandPromiseObject {
     commandName: string;
-    promise: plugins.q.Promise<any>;
+    promise: q.Promise<any>;
 }
 export declare class Smartcli {
     argv: any;
@@ -13,7 +12,7 @@ export declare class Smartcli {
     commands: any;
     questions: any;
     version: string;
-    allCommandPromises: Objectmap<commandPromiseObject>;
+    allCommandPromises: Objectmap<ICommandPromiseObject>;
     constructor();
     /**
      * adds an alias, meaning one equals the other in terms of triggering associated commands
@@ -21,16 +20,15 @@ export declare class Smartcli {
     addAlias(keyArg: any, aliasArg: any): void;
     /**
      * adds a Command by returning a Promise that reacts to the specific commandString given.
-     *
      * Note: in e.g. "npm install something" the "install" is considered the command.
      */
     addCommand(definitionArg: {
         commandName: string;
-    }): plugins.q.Promise<any>;
+    }): q.Promise<any>;
     /**
      * gets a Promise for a command word
      */
-    getCommandPromiseByName(commandNameArg: string): plugins.q.Promise<any>;
+    getCommandPromiseByName(commandNameArg: string): q.Promise<any>;
     /**
      * allows to specify help text to be printed above the rest of the help text
      */
@@ -44,7 +42,7 @@ export declare class Smartcli {
     /**
      * returns promise that is resolved when no commands are specified
      */
-    standardTask(): plugins.q.Promise<any>;
+    standardTask(): q.Promise<any>;
     /**
      * start the process of evaluating commands
      */

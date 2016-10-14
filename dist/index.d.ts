@@ -1,2 +1,1 @@
-import "typings-global";
-export { Smartcli } from "./smartcli.classes.smartcli";
+export { Smartcli } from './smartcli.classes.smartcli';

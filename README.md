@@ -43,5 +43,8 @@ mySmartcli.standardTask()
     // do something if program is called without an command
   });
 
-mySmartcli.question
+mySmartcli.addCommand({commandname: 'install'})
+  .then(argvArg => {
+    // do something if program is called with command "install"
+  })
 ```

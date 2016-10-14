@@ -1,13 +1,12 @@
-import "typings-global";
 /**
  * allows to specify an user interaction during runtime
  */
-export declare type questionType = "input" | "confirm" | "list" | "rawlist" | "expand" | "checkbox" | "password" | "editor";
-export interface choiceObject {
+export declare type questionType = 'input' | 'confirm' | 'list' | 'rawlist' | 'expand' | 'checkbox' | 'password' | 'editor';
+export interface IChoiceObject {
     name: string;
     value: any;
 }
-export interface validateFunction {
+export interface IValidateFunction {
     (any: any): boolean;
 }
 export declare class Interaction {
@@ -16,8 +15,8 @@ export declare class Interaction {
         type: questionType;
         message: string;
         default: any;
-        choices: string[] | choiceObject[];
-        validate: validateFunction;
+        choices: string[] | IChoiceObject[];
+        validate: IValidateFunction;
     }): void;
     askQuestionArray: any;
 }
