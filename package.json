@@ -31,17 +31,17 @@
     "@types/inquirer": "0.x.x",
     "@types/q": "0.x.x",
     "@types/yargs": "0.x.x",
-    "beautylog": "^5.0.20",
-    "inquirer": "^1.1.2",
-    "lik": "^1.0.15",
+    "beautylog": "^5.0.23",
+    "inquirer": "^1.2.2",
+    "lik": "^1.0.24",
     "q": "^1.4.1",
     "smartparam": "0.1.1",
-    "typings-global": "^1.0.6",
-    "yargs": "^5.0.0"
+    "typings-global": "^1.0.14",
+    "yargs": "^6.0.0"
   },
   "devDependencies": {
     "npmts-g": "^5.2.8",
-    "should": "^11.1.0",
-    "typings-test": "^1.0.1"
+    "should": "^11.1.1",
+    "typings-test": "^1.0.3"
   }
 }
