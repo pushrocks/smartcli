@@ -1,7 +1,6 @@
 import * as q from 'q'
 
 import * as plugins from './smartcli.plugins'
-import * as interaction from './smartcli.classes.interaction'
 
 // import classes
 import {Objectmap} from 'lik'

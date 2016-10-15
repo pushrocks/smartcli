@@ -48,3 +48,5 @@ mySmartcli.addCommand({commandname: 'install'})
     // do something if program is called with command "install"
   })
 ```
+
+[![npm](https://push.rocks/assets/repo-header.svg)](https://push.rocks)
