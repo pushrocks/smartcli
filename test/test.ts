@@ -1,15 +1,14 @@
 import 'typings-test'
 
 import smartcli = require('../dist/index')
-let beautylog = require('beautylog')
-let should = require('should')
+import * as should from 'should'
 
 describe('smartcli.Smartcli class',function(){
     let smartCliTestObject: smartcli.Smartcli
     describe('new Smartcli()',function(){
         it('should create a new Smartcli',function(){
             smartCliTestObject = new smartcli.Smartcli()
-            smartCliTestObject.should.be.instanceof(smartcli.Smartcli)
+            should(smartCliTestObject).be.instanceof(smartcli.Smartcli)
         })
     })
     describe('.addCommand',function(){
