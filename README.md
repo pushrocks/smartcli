@@ -35,7 +35,7 @@ mytool function argument1 argument2 --option1 -o2 option2Value
 * option1 is a longform option you can add (like --message for message)
 * optionValue is the referenced option value (like a commit message)
 
-```typescript
+```javascript
 import {Smartcli} from "smartcli"
 mySmartcli = new Smartcli();
 mySmartcli.standardTask()
@@ -47,6 +47,14 @@ mySmartcli.addCommand({commandname: 'install'})
   .then(argvArg => {
     // do something if program is called with command "install"
   })
+
+mySmartcli.addVersion('1.0.0') // -v and --version options will display the specified version in the terminal
+
+mySmartCli.addHelp({ // is triggered by help command and --help option
+  helpText: 'some help text to print' // the helpText to display
+})
+
+mySmartcli.startParse() // starts the evaluation and fullfills or rejects promises.
 ```
 
 [![npm](https://push.rocks/assets/repo-header.svg)](https://push.rocks)
