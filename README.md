@@ -31,7 +31,7 @@ mytool command argument1 argument2 --option1 -o2 option2Value
 
 * `mytool` obviously is the tool (like git)
 * `command` is the main thing the tool shall do (like commit)
-* `argument1` and argument2 are arguments
+* `argument1` and `argument2` are arguments
 * `option1` is a longform option you can add (like --message for message)
 * `optionValue` is the referenced option value (like a commit message)
 
