@@ -1,6 +1,6 @@
 {
   "name": "smartcli",
-  "version": "1.0.12",
+  "version": "1.0.13",
   "description": "nodejs wrapper for CLI related tasks",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
