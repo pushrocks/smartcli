@@ -26,14 +26,18 @@ this plugin tries to establish some logic in which CLI tools work.
 take the following commandline input:
 
 ```
-mytool function argument1 argument2 --option1 -o2 option2Value
+mytool command argument1 argument2 --option1 -o2 option2Value
 ```
 
-* 'mytool' obviously is the tool (like git)
-* function is the main thing the tool shall do (like commit)
-* argument1 and argument2 are arguments
-* option1 is a longform option you can add (like --message for message)
-* optionValue is the referenced option value (like a commit message)
+* `mytool` obviously is the tool (like git)
+* `command` is the main thing the tool shall do (like commit)
+* `argument1` and argument2 are arguments
+* `option1` is a longform option you can add (like --message for message)
+* `optionValue` is the referenced option value (like a commit message)
+
+When there is no command and no option specified the standardTask applied.
+When there is a option specified but no command, standardTask applies,
+except when of the options is -v, --version or --help.
 
 ```javascript
 import {Smartcli} from "smartcli"
