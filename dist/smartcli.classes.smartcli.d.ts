@@ -8,7 +8,7 @@ export interface ICommandPromiseObject {
 }
 export interface ITriggerObservableObject {
     triggerName: string;
-    subject: Subject<void>;
+    subject: Subject<any>;
 }
 export declare class Smartcli {
     argv: any;
@@ -42,12 +42,12 @@ export declare class Smartcli {
     /**
      * adds a Trigger. Like addCommand(), but returns an subscribable observable
      */
-    addTrigger(triggerNameArg: string): Subject<void>;
+    addTrigger(triggerNameArg: string): Subject<any>;
     /**
      * execute trigger by name
      * @param commandNameArg - the name of the command to trigger
      */
-    trigger(triggerName: string): Subject<void>;
+    trigger(triggerName: string): Subject<any>;
     /**
      * allows to specify help text to be printed above the rest of the help text
      */

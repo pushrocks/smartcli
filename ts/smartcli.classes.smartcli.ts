@@ -14,7 +14,7 @@ export interface ICommandPromiseObject {
 
 export interface ITriggerObservableObject {
     triggerName: string
-    subject: Subject<void>
+    subject: Subject<any>
 }
 
 export class Smartcli {
@@ -83,13 +83,13 @@ export class Smartcli {
      * adds a Trigger. Like addCommand(), but returns an subscribable observable 
      */
     addTrigger(triggerNameArg: string) {
-        let triggerSubject = new Subject<void>()
+        let triggerSubject = new Subject<any>()
         this.allTriggerObservablesMap.add({
             triggerName: triggerNameArg,
             subject: triggerSubject
         })
         this.addCommand(triggerNameArg).then(() => {
-            triggerSubject.next()
+            triggerSubject.next(this.argv)
         })
         return triggerSubject
     }
@@ -102,7 +102,7 @@ export class Smartcli {
         let triggerSubject = this.allTriggerObservablesMap.find(triggerObservableObjectArg => {
             return triggerObservableObjectArg.triggerName === triggerName
         }).subject
-        triggerSubject.next()
+        triggerSubject.next(this.argv)
         return triggerSubject
     }
 
