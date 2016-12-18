@@ -1,4 +1,4 @@
-import 'typings-global';
+import 'typings-global'
 
 import * as yargs from 'yargs'
 import * as beautylog from 'beautylog'

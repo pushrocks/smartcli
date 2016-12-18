@@ -1,14 +1,20 @@
 import * as q from 'q'
+import { Subject } from 'rxjs'
 
 import * as plugins from './smartcli.plugins'
 
 // import classes
-import {Objectmap} from 'lik'
+import { Objectmap } from 'lik'
 
 // interfaces
-export interface ICommandDeferredObject {
-    commandName: string
-    deferred: q.Deferred<any>
+export interface ICommandPromiseObject {
+    commandName: string,
+    promise: q.Promise<void>
+}
+
+export interface ITriggerObservableObject {
+    triggerName: string
+    subject: Subject<void>
 }
 
 export class Smartcli {
@@ -22,7 +28,12 @@ export class Smartcli {
     /**
      * map of all Command/Promise objects to keep track
      */
-    allCommandDeferredsMap = new Objectmap<ICommandDeferredObject>()
+    allCommandPromisesMap = new Objectmap<ICommandPromiseObject>()
+
+    /**
+     * map of all Trigger/Observable objects to keep track
+     */
+    allTriggerObservablesMap = new Objectmap<ITriggerObservableObject>()
 
     constructor() {
         this.argv = plugins.yargs
@@ -31,9 +42,9 @@ export class Smartcli {
     }
 
     /**
-     * adds an alias, meaning one equals the other in terms of triggering associated commands
+     * adds an alias, meaning one equals the other in terms of command execution.
      */
-    addAlias(keyArg,aliasArg): void {
+    addCommandAlias(keyArg,aliasArg): void {
         this.argv = this.argv.alias(keyArg,aliasArg)
         return
     }
@@ -42,15 +53,15 @@ export class Smartcli {
      * adds a Command by returning a Promise that reacts to the specific commandString given.
      * Note: in e.g. "npm install something" the "install" is considered the command.
      */
-    addCommand(definitionArg: {commandName: string}): q.Promise<any> {
+    addCommand(commandNameArg: string): q.Promise<any> {
         let done = q.defer<any>()
-        this.allCommandDeferredsMap.add({
-            commandName: definitionArg.commandName,
-            deferred: done
+        this.allCommandPromisesMap.add({
+            commandName: commandNameArg,
+            promise: done.promise
         })
         this.parseStarted.promise
             .then(() => {
-                if (this.argv._.indexOf(definitionArg.commandName) === 0) {
+                if (this.argv._.indexOf(commandNameArg) === 0) {
                     done.resolve(this.argv)
                 } else {
                     done.reject(this.argv)
@@ -63,21 +74,36 @@ export class Smartcli {
      * gets a Promise for a command word
      */
     getCommandPromiseByName(commandNameArg: string): q.Promise<void> {
-        return this.allCommandDeferredsMap.find(commandDeferredObjectArg => {
+        return this.allCommandPromisesMap.find(commandDeferredObjectArg => {
             return commandDeferredObjectArg.commandName === commandNameArg
-        }).deferred.promise
+        }).promise
     }
 
     /**
-     * triggers a command by name
+     * adds a Trigger. Like addCommand(), but returns an subscribable observable 
+     */
+    addTrigger(triggerNameArg: string) {
+        let triggerSubject = new Subject<void>()
+        this.allTriggerObservablesMap.add({
+            triggerName: triggerNameArg,
+            subject: triggerSubject
+        })
+        this.addCommand(triggerNameArg).then(() => {
+            triggerSubject.next()
+        })
+        return triggerSubject
+    }
+
+    /**
+     * execute trigger by name
      * @param commandNameArg - the name of the command to trigger
      */
-    triggerCommandByName(commandNameArg: string) {
-        let commandDeferred = this.allCommandDeferredsMap.find(commandDeferredObjectArg => {
-            return commandDeferredObjectArg.commandName === commandNameArg
-        }).deferred
-        commandDeferred.resolve()
-        return commandDeferred.promise
+    trigger(triggerName: string) {
+        let triggerSubject = this.allTriggerObservablesMap.find(triggerObservableObjectArg => {
+            return triggerObservableObjectArg.triggerName === triggerName
+        }).subject
+        triggerSubject.next()
+        return triggerSubject
     }
 
     /**
@@ -86,9 +112,7 @@ export class Smartcli {
     addHelp(optionsArg: {
         helpText: string
     }) {
-        this.addCommand({
-            commandName: 'help'
-        }).then(argvArg => {
+        this.addCommand('help').then(argvArg => {
             plugins.beautylog.log(optionsArg.helpText)
         })
     }
@@ -98,7 +122,7 @@ export class Smartcli {
      */
     addVersion(versionArg: string) {
         this.version = versionArg
-        this.addAlias('v','version')
+        this.addCommandAlias('v','version')
         this.parseStarted.promise
             .then(() => {
                 if (this.argv.v) {
@@ -112,6 +136,10 @@ export class Smartcli {
      */
     standardTask(): q.Promise<any> {
         let done = q.defer<any>()
+        this.allCommandPromisesMap.add({
+            commandName: 'standard',
+            promise: done.promise
+        })
         this.parseStarted.promise
             .then(() => {
                 if (this.argv._.length === 0 && !this.argv.v) {

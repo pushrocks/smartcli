@@ -13,9 +13,7 @@ describe('smartcli.Smartcli class',function(){
     })
     describe('.addCommand',function(){
         it('should add an command',function(){
-            smartCliTestObject.addCommand({
-                commandName: 'awesome'
-            })
+            smartCliTestObject.addCommand('awesome')
         })
     })
     describe('.standardTask',function(){
@@ -27,11 +25,11 @@ describe('smartcli.Smartcli class',function(){
             done()
         })
     })
-    describe('.triggerCommandByName', function() {
+    describe('.trigger', function() {
         let hasExecuted = false
         it('should accept a command', function(done) {
-            smartCliTestObject.addCommand({commandName: 'triggerme'})
-                .then(argvArg => {
+            smartCliTestObject.addTrigger('triggerme')
+                .subscribe(() => {
                     hasExecuted = true
                 })
             done()
@@ -40,11 +38,9 @@ describe('smartcli.Smartcli class',function(){
             should(hasExecuted).be.false()
         })
         it('should execute when triggered', function(done) {
-            smartCliTestObject.triggerCommandByName('triggerme')
-                .then(argvArg => {
-                    should(hasExecuted).be.true()
-                    done()
-                }).catch(err => { done(err) })
+            smartCliTestObject.trigger('triggerme')
+            should(hasExecuted).be.true()
+            done()
         })
     })
     describe('.startParse',function(){

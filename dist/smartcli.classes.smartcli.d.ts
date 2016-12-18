@@ -1,9 +1,14 @@
 /// <reference types="q" />
 import * as q from 'q';
+import { Subject } from 'rxjs';
 import { Objectmap } from 'lik';
-export interface ICommandDeferredObject {
+export interface ICommandPromiseObject {
     commandName: string;
-    deferred: q.Deferred<any>;
+    promise: q.Promise<void>;
+}
+export interface ITriggerObservableObject {
+    triggerName: string;
+    subject: Subject<void>;
 }
 export declare class Smartcli {
     argv: any;
@@ -15,28 +20,34 @@ export declare class Smartcli {
     /**
      * map of all Command/Promise objects to keep track
      */
-    allCommandDeferredsMap: Objectmap<ICommandDeferredObject>;
+    allCommandPromisesMap: Objectmap<ICommandPromiseObject>;
+    /**
+     * map of all Trigger/Observable objects to keep track
+     */
+    allTriggerObservablesMap: Objectmap<ITriggerObservableObject>;
     constructor();
     /**
-     * adds an alias, meaning one equals the other in terms of triggering associated commands
+     * adds an alias, meaning one equals the other in terms of command execution.
      */
-    addAlias(keyArg: any, aliasArg: any): void;
+    addCommandAlias(keyArg: any, aliasArg: any): void;
     /**
      * adds a Command by returning a Promise that reacts to the specific commandString given.
      * Note: in e.g. "npm install something" the "install" is considered the command.
      */
-    addCommand(definitionArg: {
-        commandName: string;
-    }): q.Promise<any>;
+    addCommand(commandNameArg: string): q.Promise<any>;
     /**
      * gets a Promise for a command word
      */
     getCommandPromiseByName(commandNameArg: string): q.Promise<void>;
     /**
-     * triggers a command by name
+     * adds a Trigger. Like addCommand(), but returns an subscribable observable
+     */
+    addTrigger(triggerNameArg: string): Subject<void>;
+    /**
+     * execute trigger by name
      * @param commandNameArg - the name of the command to trigger
      */
-    triggerCommandByName(commandNameArg: string): q.Promise<any>;
+    trigger(triggerName: string): Subject<void>;
     /**
      * allows to specify help text to be printed above the rest of the help text
      */
