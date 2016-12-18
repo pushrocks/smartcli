@@ -1,9 +1,9 @@
 /// <reference types="q" />
 import * as q from 'q';
 import { Objectmap } from 'lik';
-export interface ICommandPromiseObject {
+export interface ICommandDeferredObject {
     commandName: string;
-    promise: q.Promise<any>;
+    deferred: q.Deferred<any>;
 }
 export declare class Smartcli {
     argv: any;
@@ -12,7 +12,10 @@ export declare class Smartcli {
     commands: any;
     questions: any;
     version: string;
-    allCommandPromises: Objectmap<ICommandPromiseObject>;
+    /**
+     * map of all Command/Promise objects to keep track
+     */
+    allCommandDeferredsMap: Objectmap<ICommandDeferredObject>;
     constructor();
     /**
      * adds an alias, meaning one equals the other in terms of triggering associated commands
@@ -28,7 +31,12 @@ export declare class Smartcli {
     /**
      * gets a Promise for a command word
      */
-    getCommandPromiseByName(commandNameArg: string): q.Promise<any>;
+    getCommandPromiseByName(commandNameArg: string): q.Promise<void>;
+    /**
+     * triggers a command by name
+     * @param commandNameArg - the name of the command to trigger
+     */
+    triggerCommandByName(commandNameArg: string): q.Promise<any>;
     /**
      * allows to specify help text to be printed above the rest of the help text
      */

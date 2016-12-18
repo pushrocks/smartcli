@@ -27,6 +27,26 @@ describe('smartcli.Smartcli class',function(){
             done()
         })
     })
+    describe('.triggerCommandByName', function() {
+        let hasExecuted = false
+        it('should accept a command', function(done) {
+            smartCliTestObject.addCommand({commandName: 'triggerme'})
+                .then(argvArg => {
+                    hasExecuted = true
+                })
+            done()
+        })
+        it('should not have executed yet', function() {
+            should(hasExecuted).be.false()
+        })
+        it('should execute when triggered', function(done) {
+            smartCliTestObject.triggerCommandByName('triggerme')
+                .then(argvArg => {
+                    should(hasExecuted).be.true()
+                    done()
+                }).catch(err => { done(err) })
+        })
+    })
     describe('.startParse',function(){
         it('should start parsing the CLI input',function(){
             smartCliTestObject.startParse()
