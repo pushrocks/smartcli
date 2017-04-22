@@ -20,12 +20,12 @@ tap.test('should start parsing a standardTask', async () => {
 }).catch(tap.threw)
 
 let hasExecuted: boolean = false
+
 tap.test('should accept a command', async () => {
   smartCliTestObject.addTrigger('triggerme')
     .subscribe(() => {
       hasExecuted = true
     })
-
   return expect(smartCliTestObject.addTrigger('triggerme')).to.be.instanceof(Subject)
 }).catch(tap.threw)
 
@@ -38,7 +38,7 @@ tap.test('should execute when triggered', async () => {
   return expect(hasExecuted).be.true
 }).catch(tap.threw)
 
-tap.test('should start parsing the CLI input', async () => {
+/*tap.test('should start parsing the CLI input', async () => {
   smartCliTestObject.startParse()
   return await expect(smartCliTestObject.parseStarted.promise).to.eventually.be.fulfilled
-}).catch(tap.threw)
+}).catch(tap.threw)*/
