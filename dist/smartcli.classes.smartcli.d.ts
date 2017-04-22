@@ -1,3 +1,4 @@
+import * as smartq from 'smartq';
 import { Subject } from 'rxjs';
 import { Objectmap } from 'lik';
 export interface ICommandPromiseObject {
@@ -11,7 +12,7 @@ export interface ITriggerObservableObject {
 export declare class Smartcli {
     argv: any;
     questionsDone: any;
-    parseStarted: any;
+    parseStarted: smartq.Deferred<any>;
     commands: any;
     questions: any;
     version: string;

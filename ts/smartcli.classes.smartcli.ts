@@ -20,7 +20,7 @@ export interface ITriggerObservableObject {
 export class Smartcli {
   argv: any
   questionsDone
-  parseStarted
+  parseStarted: smartq.Deferred<any>
   commands
   questions
   version: string
