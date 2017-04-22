@@ -1,51 +1,44 @@
-import 'typings-test'
+import { tap, expect } from 'tapbundle'
 
 import smartcli = require('../dist/index')
-import * as should from 'should'
 
-describe('smartcli.Smartcli class',function(){
-    let smartCliTestObject: smartcli.Smartcli
-    describe('new Smartcli()',function(){
-        it('should create a new Smartcli',function(){
-            smartCliTestObject = new smartcli.Smartcli()
-            should(smartCliTestObject).be.instanceof(smartcli.Smartcli)
-        })
-    })
-    describe('.addCommand',function(){
-        it('should add an command',function(){
-            smartCliTestObject.addCommand('awesome')
-        })
-    })
-    describe('.standardTask',function(){
-        it('should start parsing a standardTask',function(done){
-            smartCliTestObject.standardTask()
-                .then(() => {
-                    console.log('this is the standard Task!')
-                })
-            done()
-        })
-    })
-    describe('.trigger', function() {
-        let hasExecuted = false
-        it('should accept a command', function(done) {
-            smartCliTestObject.addTrigger('triggerme')
-                .subscribe(() => {
-                    hasExecuted = true
-                })
-            done()
-        })
-        it('should not have executed yet', function() {
-            should(hasExecuted).be.false()
-        })
-        it('should execute when triggered', function(done) {
-            smartCliTestObject.trigger('triggerme')
-            should(hasExecuted).be.true()
-            done()
-        })
-    })
-    describe('.startParse',function(){
-        it('should start parsing the CLI input',function(){
-            smartCliTestObject.startParse()
-        })
+let smartCliTestObject: smartcli.Smartcli
+
+tap.test('should create a new Smartcli', async () => {
+  smartCliTestObject = new smartcli.Smartcli()
+  return expect(smartCliTestObject).be.instanceof(smartcli.Smartcli)
+})
+
+
+tap.test('should add an command', async () => {
+  smartCliTestObject.addCommand('awesome')
+})
+
+
+tap.test('should start parsing a standardTask', async () => {
+  smartCliTestObject.standardTask()
+    .then(() => {
+      console.log('this is the standard Task!')
     })
 })
+
+let hasExecuted: boolean = false
+tap.test('should accept a command', async () => {
+  smartCliTestObject.addTrigger('triggerme')
+    .subscribe(() => {
+      hasExecuted = true
+    })
+})
+tap.test('should not have executed yet', async () => {
+  expect(hasExecuted).to.be.false
+})
+tap.test('should execute when triggered', async () => {
+  smartCliTestObject.trigger('triggerme')
+  expect(hasExecuted).be.true
+})
+
+
+tap.test('should start parsing the CLI input', async () => {
+  smartCliTestObject.startParse()
+})
+

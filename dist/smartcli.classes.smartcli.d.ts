@@ -1,10 +1,8 @@
-/// <reference types="q" />
-import * as q from 'q';
 import { Subject } from 'rxjs';
 import { Objectmap } from 'lik';
 export interface ICommandPromiseObject {
     commandName: string;
-    promise: q.Promise<void>;
+    promise: Promise<void>;
 }
 export interface ITriggerObservableObject {
     triggerName: string;
@@ -34,11 +32,11 @@ export declare class Smartcli {
      * adds a Command by returning a Promise that reacts to the specific commandString given.
      * Note: in e.g. "npm install something" the "install" is considered the command.
      */
-    addCommand(commandNameArg: string): q.Promise<any>;
+    addCommand(commandNameArg: string): Promise<any>;
     /**
      * gets a Promise for a command word
      */
-    getCommandPromiseByName(commandNameArg: string): q.Promise<void>;
+    getCommandPromiseByName(commandNameArg: string): Promise<void>;
     /**
      * adds a Trigger. Like addCommand(), but returns an subscribable observable
      */
@@ -61,7 +59,7 @@ export declare class Smartcli {
     /**
      * returns promise that is resolved when no commands are specified
      */
-    standardTask(): q.Promise<any>;
+    standardTask(): Promise<any>;
     /**
      * start the process of evaluating commands
      */

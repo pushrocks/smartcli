@@ -7,9 +7,9 @@ import * as path from 'path'
 import * as smartparam from 'smartparam'
 
 export {
-    yargs,
-    beautylog,
-    lik,
-    path,
-    smartparam
+  yargs,
+  beautylog,
+  lik,
+  path,
+  smartparam
 }
