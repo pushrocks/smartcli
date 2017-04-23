@@ -35,7 +35,7 @@ export class Smartcli {
    */
   allTriggerObservablesMap = new Objectmap<ITriggerObservableObject>()
 
-  constructor() {
+  constructor () {
     this.argv = plugins.yargs
     this.questionsDone = smartq.defer()
     this.parseStarted = smartq.defer()
@@ -63,8 +63,6 @@ export class Smartcli {
       .then(() => {
         if (this.argv._.indexOf(commandNameArg) === 0) {
           done.resolve(this.argv)
-        } else {
-          done.reject(this.argv)
         }
       })
     return done.promise

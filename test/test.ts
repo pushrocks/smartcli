@@ -38,7 +38,9 @@ tap.test('should execute when triggered', async () => {
   return expect(hasExecuted).be.true
 }).catch(tap.threw)
 
-/*tap.test('should start parsing the CLI input', async () => {
+tap.test('should start parsing the CLI input', async () => {
   smartCliTestObject.startParse()
   return await expect(smartCliTestObject.parseStarted.promise).to.eventually.be.fulfilled
-}).catch(tap.threw)*/
+}).catch(tap.threw)
+
+tap.start()

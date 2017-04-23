@@ -39,6 +39,6 @@
     "yargs": "^7.1.0"
   },
   "devDependencies": {
-    "tapbundle": "^1.0.5"
+    "tapbundle": "^1.0.6"
   }
 }
