@@ -142,8 +142,6 @@ export class Smartcli {
       .then(() => {
         if (this.argv._.length === 0 && !this.argv.v) {
           done.resolve(this.argv)
-        } else {
-          done.reject(this.argv)
         }
       })
     return done.promise
