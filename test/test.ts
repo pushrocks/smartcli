@@ -11,7 +11,7 @@ tap.test('should create a new Smartcli', async () => {
 })
 
 tap.test('should add an command', async () => {
-  expect(smartCliTestObject.addCommand('awesome')).to.not.throw()
+  expect(smartCliTestObject.addCommand('awesome')).to.be.instanceOf(Promise)
 })
 
 tap.test('should start parsing a standardTask', async () => {
@@ -39,7 +39,7 @@ tap.test('should execute when triggered', async () => {
 
 tap.test('should start parsing the CLI input', async () => {
   smartCliTestObject.startParse()
-  expect(await smartCliTestObject.parseStarted.promise).to.not.throw()
+  expect(smartCliTestObject.parseStarted.promise).to.be.instanceOf(Promise)
 })
 
 tap.start()
