@@ -24,6 +24,7 @@ export class Smartcli {
   commands
   questions
   version: string
+  private onlyOnProcessEnvCliCall = false
 
   /**
    * map of all Command/Promise objects to keep track
@@ -39,6 +40,10 @@ export class Smartcli {
     this.argv = plugins.yargs
     this.questionsDone = smartq.defer()
     this.parseStarted = smartq.defer()
+  }
+
+  onlyTriggerOnProcessEnvCliCall () {
+    this.onlyOnProcessEnvCliCall = true
   }
 
   /**
@@ -141,7 +146,15 @@ export class Smartcli {
     this.parseStarted.promise
       .then(() => {
         if (this.argv._.length === 0 && !this.argv.v) {
-          done.resolve(this.argv)
+          if (this.onlyOnProcessEnvCliCall) {
+            if (process.env.CLI_CALL === 'true') {
+              done.resolve(this.argv)
+            } else {
+              return
+            }
+          } else {
+            done.resolve(this.argv)
+          }
         }
       })
     return done.promise

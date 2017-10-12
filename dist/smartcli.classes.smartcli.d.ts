@@ -16,6 +16,7 @@ export declare class Smartcli {
     commands: any;
     questions: any;
     version: string;
+    private onlyOnProcessEnvCliCall;
     /**
      * map of all Command/Promise objects to keep track
      */
@@ -25,6 +26,7 @@ export declare class Smartcli {
      */
     allTriggerObservablesMap: Objectmap<ITriggerObservableObject>;
     constructor();
+    onlyTriggerOnProcessEnvCliCall(): void;
     /**
      * adds an alias, meaning one equals the other in terms of command execution.
      */
