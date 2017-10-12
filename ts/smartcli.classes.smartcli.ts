@@ -44,7 +44,7 @@ export class Smartcli {
   /**
    * adds an alias, meaning one equals the other in terms of command execution.
    */
-  addCommandAlias(keyArg, aliasArg): void {
+  addCommandAlias (keyArg, aliasArg): void {
     this.argv = this.argv.alias(keyArg, aliasArg)
     return
   }
@@ -53,7 +53,7 @@ export class Smartcli {
    * adds a Command by returning a Promise that reacts to the specific commandString given.
    * Note: in e.g. "npm install something" the "install" is considered the command.
    */
-  addCommand(commandNameArg: string): Promise<any> {
+  addCommand (commandNameArg: string): Promise<any> {
     let done = smartq.defer<any>()
     this.allCommandPromisesMap.add({
       commandName: commandNameArg,
@@ -71,16 +71,16 @@ export class Smartcli {
   /**
    * gets a Promise for a command word
    */
-  getCommandPromiseByName(commandNameArg: string): Promise<void> {
+  getCommandPromiseByName (commandNameArg: string): Promise<void> {
     return this.allCommandPromisesMap.find(commandDeferredObjectArg => {
       return commandDeferredObjectArg.commandName === commandNameArg
     }).promise
   }
 
   /**
-   * adds a Trigger. Like addCommand(), but returns an subscribable observable 
+   * adds a Trigger. Like addCommand(), but returns an subscribable observable
    */
-  addTrigger(triggerNameArg: string) {
+  addTrigger (triggerNameArg: string) {
     let triggerSubject = new Subject<any>()
     this.allTriggerObservablesMap.add({
       triggerName: triggerNameArg,
@@ -96,7 +96,7 @@ export class Smartcli {
    * execute trigger by name
    * @param commandNameArg - the name of the command to trigger
    */
-  trigger(triggerName: string) {
+  trigger (triggerName: string) {
     let triggerSubject = this.allTriggerObservablesMap.find(triggerObservableObjectArg => {
       return triggerObservableObjectArg.triggerName === triggerName
     }).subject
@@ -107,7 +107,7 @@ export class Smartcli {
   /**
    * allows to specify help text to be printed above the rest of the help text
    */
-  addHelp(optionsArg: {
+  addHelp (optionsArg: {
     helpText: string
   }) {
     this.addCommand('help').then(argvArg => {
@@ -118,7 +118,7 @@ export class Smartcli {
   /**
    * specify version to be printed for -v --version
    */
-  addVersion(versionArg: string) {
+  addVersion (versionArg: string) {
     this.version = versionArg
     this.addCommandAlias('v', 'version')
     this.parseStarted.promise
@@ -132,7 +132,7 @@ export class Smartcli {
   /**
    * returns promise that is resolved when no commands are specified
    */
-  standardTask(): Promise<any> {
+  standardTask (): Promise<any> {
     let done = smartq.defer<any>()
     this.allCommandPromisesMap.add({
       commandName: 'standard',
@@ -150,7 +150,7 @@ export class Smartcli {
   /**
    * start the process of evaluating commands
    */
-  startParse(): void {
+  startParse (): void {
     this.argv = this.argv.argv
     this.parseStarted.resolve()
     return
