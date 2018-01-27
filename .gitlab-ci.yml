@@ -8,6 +8,7 @@ cache:
 
 stages:
 - mirror
+- security
 - test
 - release
 - trigger
@@ -19,6 +20,12 @@ mirror:
   - npmci git mirror
   tags:
   - docker
+
+security:
+  stage: security
+  script:
+    - npmci command yarn gobal add snyk
+    - npmci command snyk test
 
 testLEGACY:
   stage: test
