@@ -30,17 +30,6 @@ security:
   tags:
   - docker
 
-testLEGACY:
-  stage: test
-  script:
-  - npmci node install legacy
-  - npmci npm install
-  - npmci npm test
-  coverage: /\d+.?\d+?\%\s*coverage/
-  tags:
-  - docker
-  allow_failure: true
-
 testLTS:
   stage: test
   script:
