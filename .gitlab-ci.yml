@@ -26,6 +26,8 @@ security:
   script:
     - npmci command yarn gobal add snyk
     - npmci command snyk test
+  tags:
+  - docker
 
 testLEGACY:
   stage: test
