@@ -25,7 +25,7 @@ security:
   stage: security
   script:
     - npmci command yarn global add snyk
-    - npmci npm install
+    - npmci command yarn install --ignore-scripts
     - npmci command snyk test
   tags:
   - docker
