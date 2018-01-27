@@ -1,13 +1,13 @@
 {
   "name": "smartcli",
-  "version": "2.0.9",
+  "version": "2.0.10",
   "description": "nodejs wrapper for CLI related tasks",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
   "scripts": {
     "test": "(npmts)",
     "testm": "(cd ts/compile && gulp) && (node test.js jazz jam --awesome)",
-    "security":"snyk test"
+    "security": "snyk test"
   },
   "repository": {
     "type": "git",
