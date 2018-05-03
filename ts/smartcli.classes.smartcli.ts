@@ -1,172 +1,165 @@
-import * as smartq from 'smartq'
-import { Subject } from 'rxjs'
+import * as smartq from 'smartq';
+import { Subject } from 'rxjs';
 
-import * as plugins from './smartcli.plugins'
+import * as plugins from './smartcli.plugins';
 
 // import classes
-import { Objectmap } from 'lik'
+import { Objectmap } from 'lik';
 
 // interfaces
 export interface ICommandPromiseObject {
-  commandName: string,
-  promise: Promise<void>
+  commandName: string;
+  promise: Promise<void>;
 }
 
 export interface ITriggerObservableObject {
-  triggerName: string
-  subject: Subject<any>
+  triggerName: string;
+  subject: Subject<any>;
 }
 
+/**
+ * class to create a new instance of Smartcli. Handles parsing of command line arguments.
+ */
 export class Smartcli {
-  argv: any
-  questionsDone
-  parseStarted: smartq.Deferred<any>
-  commands
-  questions
-  version: string
-  private onlyOnProcessEnvCliCall = false
-
-  /**
-   * map of all Command/Promise objects to keep track
-   */
-  allCommandPromisesMap = new Objectmap<ICommandPromiseObject>()
+  argv: any;
+  questionsDone;
+  parseStarted: smartq.Deferred<any>;
+  commands;
+  questions;
+  version: string;
+  private onlyOnProcessEnvCliCall = false;
 
   /**
    * map of all Trigger/Observable objects to keep track
    */
-  allTriggerObservablesMap = new Objectmap<ITriggerObservableObject>()
+  allTriggerObservablesMap = new Objectmap<ITriggerObservableObject>();
 
-  constructor () {
-    this.argv = plugins.yargs
-    this.questionsDone = smartq.defer()
-    this.parseStarted = smartq.defer()
+  /**
+   * The constructor of Smartcli
+   */
+  constructor() {
+    this.argv = plugins.yargs;
+    this.questionsDone = smartq.defer();
+    this.parseStarted = smartq.defer();
   }
 
-  onlyTriggerOnProcessEnvCliCall () {
-    this.onlyOnProcessEnvCliCall = true
+  /**
+   * halts any execution of commands if (process.env.CLI_CALL === false)
+   */
+  onlyTriggerOnProcessEnvCliCall() {
+    this.onlyOnProcessEnvCliCall = true;
   }
 
   /**
    * adds an alias, meaning one equals the other in terms of command execution.
    */
-  addCommandAlias (keyArg, aliasArg): void {
-    this.argv = this.argv.alias(keyArg, aliasArg)
-    return
+  addCommandAlias(keyArg, aliasArg): void {
+    this.argv = this.argv.alias(keyArg, aliasArg);
+    return;
   }
 
   /**
    * adds a Command by returning a Promise that reacts to the specific commandString given.
    * Note: in e.g. "npm install something" the "install" is considered the command.
    */
-  addCommand (commandNameArg: string): Promise<any> {
-    let done = smartq.defer<any>()
-    this.allCommandPromisesMap.add({
-      commandName: commandNameArg,
-      promise: done.promise
-    })
-    this.parseStarted.promise
-      .then(() => {
-        if (this.argv._.indexOf(commandNameArg) === 0) {
-          done.resolve(this.argv)
-        }
-      })
-    return done.promise
-  }
-
-  /**
-   * gets a Promise for a command word
-   */
-  getCommandPromiseByName (commandNameArg: string): Promise<void> {
-    return this.allCommandPromisesMap.find(commandDeferredObjectArg => {
-      return commandDeferredObjectArg.commandName === commandNameArg
-    }).promise
+  addCommand(commandNameArg: string): Subject<any> {
+    let triggerSubject = this.addTrigger(commandNameArg);
+    this.parseStarted.promise.then(() => {
+      if (this.argv._.indexOf(commandNameArg) === 0) {
+        this.trigger(commandNameArg);
+      }
+    });
+    return triggerSubject;
   }
 
   /**
    * adds a Trigger. Like addCommand(), but returns an subscribable observable
    */
-  addTrigger (triggerNameArg: string) {
-    let triggerSubject = new Subject<any>()
-    this.allTriggerObservablesMap.add({
-      triggerName: triggerNameArg,
-      subject: triggerSubject
-    })
-    this.addCommand(triggerNameArg).then(() => {
-      triggerSubject.next(this.argv)
-    })
-    return triggerSubject
+  addTrigger(triggerNameArg: string) {
+    let triggerSubject = new Subject<any>();
+    if (!this.getTriggerSubject(triggerNameArg)) {
+      this.allTriggerObservablesMap.add({
+        triggerName: triggerNameArg,
+        subject: triggerSubject
+      });
+    } else {
+      throw new Error(`you can't add a trigger twice`);
+    }
+    return triggerSubject;
   }
 
   /**
    * execute trigger by name
    * @param commandNameArg - the name of the command to trigger
    */
-  trigger (triggerName: string) {
-    let triggerSubject = this.allTriggerObservablesMap.find(triggerObservableObjectArg => {
-      return triggerObservableObjectArg.triggerName === triggerName
-    }).subject
-    triggerSubject.next(this.argv)
-    return triggerSubject
+  trigger(triggerName: string) {
+    let triggerSubject = this.getTriggerSubject(triggerName);
+    triggerSubject.next(this.argv);
+    return triggerSubject;
+  }
+
+  getTriggerSubject(triggerName: string) {
+    const triggerObservableObject = this.allTriggerObservablesMap.find(
+      triggerObservableObjectArg => {
+        return triggerObservableObjectArg.triggerName === triggerName;
+      }
+    );
+    if (triggerObservableObject) {
+      return triggerObservableObject.subject;
+    } else {
+      return null;
+    }
   }
 
   /**
    * allows to specify help text to be printed above the rest of the help text
    */
-  addHelp (optionsArg: {
-    helpText: string
-  }) {
-    this.addCommand('help').then(argvArg => {
-      plugins.beautylog.log(optionsArg.helpText)
-    })
+  addHelp(optionsArg: { helpText: string }) {
+    this.addCommand('help').subscribe(argvArg => {
+      plugins.beautylog.log(optionsArg.helpText);
+    });
   }
 
   /**
    * specify version to be printed for -v --version
    */
-  addVersion (versionArg: string) {
-    this.version = versionArg
-    this.addCommandAlias('v', 'version')
-    this.parseStarted.promise
-      .then(() => {
-        if (this.argv.v) {
-          console.log(this.version)
-        }
-      })
+  addVersion(versionArg: string) {
+    this.version = versionArg;
+    this.addCommandAlias('v', 'version');
+    this.parseStarted.promise.then(() => {
+      if (this.argv.v) {
+        console.log(this.version);
+      }
+    });
   }
 
   /**
-   * returns promise that is resolved when no commands are specified
+   * adds a trigger that is called when no command is specified
    */
-  standardTask (): Promise<any> {
-    let done = smartq.defer<any>()
-    this.allCommandPromisesMap.add({
-      commandName: 'standard',
-      promise: done.promise
-    })
-    this.parseStarted.promise
-      .then(() => {
-        if (this.argv._.length === 0 && !this.argv.v) {
-          if (this.onlyOnProcessEnvCliCall) {
-            if (process.env.CLI_CALL === 'true') {
-              done.resolve(this.argv)
-            } else {
-              return
-            }
+  standardTask(): Subject<any> {
+    let standardSubject = this.addTrigger('standardTask');
+    this.parseStarted.promise.then(() => {
+      if (this.argv._.length === 0 && !this.argv.v) {
+        if (this.onlyOnProcessEnvCliCall) {
+          if (process.env.CLI_CALL === 'true') {
+            this.trigger('standardTask');
           } else {
-            done.resolve(this.argv)
+            return;
           }
+        } else {
+          this.trigger('standardTask');
         }
-      })
-    return done.promise
+      }
+    });
+    return standardSubject;
   }
 
   /**
    * start the process of evaluating commands
    */
-  startParse (): void {
-    this.argv = this.argv.argv
-    this.parseStarted.resolve()
-    return
+  startParse(): void {
+    this.argv = this.argv.argv;
+    this.parseStarted.resolve();
+    return;
   }
-
 }

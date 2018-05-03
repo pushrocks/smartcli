@@ -1,4 +1,3 @@
-import 'typings-global';
 import * as yargs from 'yargs';
 import * as beautylog from 'beautylog';
 import * as lik from 'lik';

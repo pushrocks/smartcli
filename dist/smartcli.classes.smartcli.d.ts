@@ -1,6 +1,6 @@
 import * as smartq from 'smartq';
 import { Subject } from 'rxjs';
-import { Objectmap } from 'lik';
+import * as plugins from './smartcli.plugins';
 export interface ICommandPromiseObject {
     commandName: string;
     promise: Promise<void>;
@@ -9,6 +9,9 @@ export interface ITriggerObservableObject {
     triggerName: string;
     subject: Subject<any>;
 }
+/**
+ * class to create a new instance of Smartcli. Handles parsing of command line arguments.
+ */
 export declare class Smartcli {
     argv: any;
     questionsDone: any;
@@ -18,14 +21,16 @@ export declare class Smartcli {
     version: string;
     private onlyOnProcessEnvCliCall;
     /**
-     * map of all Command/Promise objects to keep track
-     */
-    allCommandPromisesMap: Objectmap<ICommandPromiseObject>;
-    /**
      * map of all Trigger/Observable objects to keep track
      */
-    allTriggerObservablesMap: Objectmap<ITriggerObservableObject>;
+    allTriggerObservablesMap: plugins.lik.Objectmap<ITriggerObservableObject>;
+    /**
+     * The constructor of Smartcli
+     */
     constructor();
+    /**
+     * halts any execution of commands if (process.env.CLI_CALL === false)
+     */
     onlyTriggerOnProcessEnvCliCall(): void;
     /**
      * adds an alias, meaning one equals the other in terms of command execution.
@@ -35,11 +40,7 @@ export declare class Smartcli {
      * adds a Command by returning a Promise that reacts to the specific commandString given.
      * Note: in e.g. "npm install something" the "install" is considered the command.
      */
-    addCommand(commandNameArg: string): Promise<any>;
-    /**
-     * gets a Promise for a command word
-     */
-    getCommandPromiseByName(commandNameArg: string): Promise<void>;
+    addCommand(commandNameArg: string): Subject<any>;
     /**
      * adds a Trigger. Like addCommand(), but returns an subscribable observable
      */
@@ -49,6 +50,7 @@ export declare class Smartcli {
      * @param commandNameArg - the name of the command to trigger
      */
     trigger(triggerName: string): Subject<any>;
+    getTriggerSubject(triggerName: string): Subject<any>;
     /**
      * allows to specify help text to be printed above the rest of the help text
      */
@@ -60,9 +62,9 @@ export declare class Smartcli {
      */
     addVersion(versionArg: string): void;
     /**
-     * returns promise that is resolved when no commands are specified
+     * adds a trigger that is called when no command is specified
      */
-    standardTask(): Promise<any>;
+    standardTask(): Subject<any>;
     /**
      * start the process of evaluating commands
      */

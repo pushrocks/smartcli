@@ -1,6 +1,5 @@
 "use strict";
 Object.defineProperty(exports, "__esModule", { value: true });
-require("typings-global");
 const yargs = require("yargs");
 exports.yargs = yargs;
 const beautylog = require("beautylog");
@@ -11,4 +10,4 @@ const path = require("path");
 exports.path = path;
 const smartparam = require("smartparam");
 exports.smartparam = smartparam;
-//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21hcnRjbGkucGx1Z2lucy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3RzL3NtYXJ0Y2xpLnBsdWdpbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSwwQkFBdUI7QUFFdkIsK0JBQThCO0FBTzVCLHNCQUFLO0FBTlAsdUNBQXNDO0FBT3BDLDhCQUFTO0FBTlgsMkJBQTBCO0FBT3hCLGtCQUFHO0FBTkwsNkJBQTRCO0FBTzFCLG9CQUFJO0FBTk4seUNBQXdDO0FBT3RDLGdDQUFVIn0=
+//# sourceMappingURL=data:application/json;base64,eyJ2ZXJzaW9uIjozLCJmaWxlIjoic21hcnRjbGkucGx1Z2lucy5qcyIsInNvdXJjZVJvb3QiOiIiLCJzb3VyY2VzIjpbIi4uL3RzL3NtYXJ0Y2xpLnBsdWdpbnMudHMiXSwibmFtZXMiOltdLCJtYXBwaW5ncyI6Ijs7QUFBQSwrQkFBK0I7QUFNdEIsc0JBQUs7QUFMZCx1Q0FBdUM7QUFLdkIsOEJBQVM7QUFKekIsMkJBQTJCO0FBSUEsa0JBQUc7QUFIOUIsNkJBQTZCO0FBR0csb0JBQUk7QUFGcEMseUNBQXlDO0FBRUgsZ0NBQVUifQ==
