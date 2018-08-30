@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import * as plugins from './smartcli.plugins';
 
 // import classes
-import { Objectmap } from 'lik';
+import { Objectmap } from '@pushrocks/lik';
 
 // interfaces
 export interface ICommandPromiseObject {
@@ -116,7 +116,7 @@ export class Smartcli {
    */
   addHelp(optionsArg: { helpText: string }) {
     this.addCommand('help').subscribe(argvArg => {
-      plugins.beautylog.log(optionsArg.helpText);
+      plugins.smartlog.defaultLogger.info(optionsArg.helpText);
     });
   }
 

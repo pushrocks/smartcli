@@ -1,4 +1,4 @@
-import { tap, expect } from 'tapbundle';
+import { tap, expect } from '@pushrocks/tapbundle';
 import { Subject } from 'rxjs';
 
 import smartcli = require('../ts/index');
