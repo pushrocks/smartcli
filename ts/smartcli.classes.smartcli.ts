@@ -1,4 +1,4 @@
-import * as smartq from 'smartq';
+import * as smartpromise from '@pushrocks/smartpromise';
 import { Subject } from 'rxjs';
 
 import * as plugins from './smartcli.plugins';
@@ -23,7 +23,7 @@ export interface ITriggerObservableObject {
 export class Smartcli {
   argv: any;
   questionsDone;
-  parseStarted: smartq.Deferred<any>;
+  parseStarted: smartpromise.Deferred<any>;
   commands;
   questions;
   version: string;
@@ -39,8 +39,8 @@ export class Smartcli {
    */
   constructor() {
     this.argv = plugins.yargs;
-    this.questionsDone = smartq.defer();
-    this.parseStarted = smartq.defer();
+    this.questionsDone = smartpromise.defer();
+    this.parseStarted = smartpromise.defer();
   }
 
   /**
