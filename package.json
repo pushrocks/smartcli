@@ -1,7 +1,7 @@
 {
   "name": "@pushrocks/smartcli",
   "private": false,
-  "version": "3.0.5",
+  "version": "3.0.6",
   "description": "nodejs wrapper for CLI related tasks",
   "main": "dist/index.js",
   "typings": "dist/index.d.ts",
