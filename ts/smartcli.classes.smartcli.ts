@@ -116,7 +116,7 @@ export class Smartcli {
    */
   addHelp(optionsArg: { helpText: string }) {
     this.addCommand('help').subscribe(argvArg => {
-      plugins.smartlog.defaultLogger.info(optionsArg.helpText);
+      plugins.smartlog.defaultLogger.log('info', optionsArg.helpText);
     });
   }
 
