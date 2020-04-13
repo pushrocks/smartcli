@@ -63,7 +63,7 @@ export class Smartcli {
    * Note: in e.g. "npm install something" the "install" is considered the command.
    */
   addCommand(commandNameArg: string): Subject<any> {
-    let triggerSubject = this.addTrigger(commandNameArg);
+    const triggerSubject = this.addTrigger(commandNameArg);
     this.parseStarted.promise.then(() => {
       if (this.argv._.indexOf(commandNameArg) === 0) {
         this.trigger(commandNameArg);
@@ -76,7 +76,7 @@ export class Smartcli {
    * adds a Trigger. Like addCommand(), but returns an subscribable observable
    */
   addTrigger(triggerNameArg: string) {
-    let triggerSubject = new Subject<any>();
+    const triggerSubject = new Subject<any>();
     if (!this.getTriggerSubject(triggerNameArg)) {
       this.allTriggerObservablesMap.add({
         triggerName: triggerNameArg,
@@ -93,7 +93,7 @@ export class Smartcli {
    * @param commandNameArg - the name of the command to trigger
    */
   trigger(triggerName: string) {
-    let triggerSubject = this.getTriggerSubject(triggerName);
+    const triggerSubject = this.getTriggerSubject(triggerName);
     triggerSubject.next(this.argv);
     return triggerSubject;
   }
@@ -137,9 +137,13 @@ export class Smartcli {
    * adds a trigger that is called when no command is specified
    */
   standardTask(): Subject<any> {
-    let standardSubject = this.addTrigger('standardTask');
+    const standardSubject = this.addTrigger('standardTask');
     this.parseStarted.promise.then(() => {
-      if (this.argv._.length === 0 && !this.argv.v) {
+      if (
+        (this.argv._.length === 0 ||
+          (this.argv._.length === 1 && this.argv._[0].startsWith('test/'))) &&
+        !this.argv.v
+      ) {
         if (this.onlyOnProcessEnvCliCall) {
           if (process.env.CLI_CALL === 'true') {
             this.trigger('standardTask');

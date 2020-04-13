@@ -3,8 +3,8 @@
   "private": false,
   "version": "3.0.9",
   "description": "easy observable cli tasks",
-  "main": "dist/index.js",
-  "typings": "dist/index.d.ts",
+  "main": "dist_ts/index.js",
+  "typings": "dist_ts/index.d.ts",
   "scripts": {
     "test": "(tstest test/)",
     "build": "(tsbuild)"
@@ -31,23 +31,24 @@
     "@pushrocks/smartparam": "^1.1.6",
     "@pushrocks/smartpromise": "^3.0.6",
     "@types/yargs": "^15.0.4",
-    "rxjs": "^6.5.4",
-    "yargs": "^15.3.0"
+    "rxjs": "^6.5.5",
+    "yargs": "^15.3.1"
   },
   "devDependencies": {
-    "@gitzone/tsbuild": "^2.1.20",
+    "@gitzone/tsbuild": "^2.1.22",
     "@gitzone/tsrun": "^1.2.8",
     "@gitzone/tstest": "^1.0.28",
-    "@pushrocks/tapbundle": "^3.2.0",
-    "@types/node": "^13.9.0",
-    "tslint": "^6.1.0",
+    "@pushrocks/tapbundle": "^3.2.1",
+    "@types/node": "^13.11.1",
+    "tslint": "^6.1.1",
     "tslint-config-prettier": "^1.18.0"
   },
   "files": [
     "ts/**/*",
     "ts_web/**/*",
     "dist/**/*",
-    "dist_web/**/*",
+    "dist_*/**/*",
+    "dist_ts/**/*",
     "dist_ts_web/**/*",
     "assets/**/*",
     "cli.js",

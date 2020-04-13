@@ -23,8 +23,6 @@ nodejs wrapper for CLI related tasks
 
 ## Usage
 
-
-
 For further information read the linked docs at the top of this README.
 
 > MIT licensed | **&copy;** [Lossless GmbH](https://lossless.gmbh)
