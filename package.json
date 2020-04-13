@@ -1,7 +1,7 @@
 {
   "name": "@pushrocks/smartcli",
   "private": false,
-  "version": "3.0.9",
+  "version": "3.0.10",
   "description": "easy observable cli tasks",
   "main": "dist_ts/index.js",
   "typings": "dist_ts/index.d.ts",
