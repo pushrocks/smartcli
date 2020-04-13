@@ -27,7 +27,7 @@ export class Smartcli {
   commands;
   questions;
   version: string;
-  private onlyOnProcessEnvCliCall = false;
+  private checkForEnvCliCall = true;
 
   /**
    * map of all Trigger/Observable objects to keep track
@@ -46,8 +46,8 @@ export class Smartcli {
   /**
    * halts any execution of commands if (process.env.CLI_CALL === false)
    */
-  onlyTriggerOnProcessEnvCliCall() {
-    this.onlyOnProcessEnvCliCall = true;
+  disableEnvCliCall() {
+    this.checkForEnvCliCall = false;
   }
 
   /**
@@ -144,15 +144,7 @@ export class Smartcli {
           (this.argv._.length === 1 && this.argv._[0].startsWith('test/'))) &&
         !this.argv.v
       ) {
-        if (this.onlyOnProcessEnvCliCall) {
-          if (process.env.CLI_CALL === 'true') {
-            this.trigger('standardTask');
-          } else {
-            return;
-          }
-        } else {
-          this.trigger('standardTask');
-        }
+        this.trigger('standardTask');
       }
     });
     return standardSubject;
@@ -162,6 +154,10 @@ export class Smartcli {
    * start the process of evaluating commands
    */
   startParse(): void {
+    if (!process.env.CLI_CALL && this.checkForEnvCliCall) {
+      console.log(`note: @pushrocks/smartcli: You called .startParse() on a SmartCli instance. However process.env.CLI_CALL being absent prevented parsing.`);
+      return;
+    }
     this.argv = this.argv.argv;
     this.parseStarted.resolve();
     return;
