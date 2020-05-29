@@ -4,7 +4,7 @@ import { Subject } from 'rxjs';
 import * as plugins from './smartcli.plugins';
 
 // import classes
-import { Objectmap } from '@pushrocks/lik';
+import { ObjectMap } from '@pushrocks/lik';
 
 // interfaces
 export interface ICommandPromiseObject {
@@ -32,7 +32,7 @@ export class Smartcli {
   /**
    * map of all Trigger/Observable objects to keep track
    */
-  allTriggerObservablesMap = new Objectmap<ITriggerObservableObject>();
+  allTriggerObservablesMap = new ObjectMap<ITriggerObservableObject>();
 
   /**
    * The constructor of Smartcli
@@ -155,7 +155,9 @@ export class Smartcli {
    */
   startParse(): void {
     if (!process.env.CLI_CALL && this.checkForEnvCliCall) {
-      console.log(`note: @pushrocks/smartcli: You called .startParse() on a SmartCli instance. However process.env.CLI_CALL being absent prevented parsing.`);
+      console.log(
+        `note: @pushrocks/smartcli: You called .startParse() on a SmartCli instance. However process.env.CLI_CALL being absent prevented parsing.`
+      );
       return;
     }
     this.argv = this.argv.argv;
